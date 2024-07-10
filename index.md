@@ -5,7 +5,6 @@ layout: home
 hero:
   name: "Felbry's Blog"
   text: "个人博客"
-  tagline: My great project tagline
   actions:
     - theme: brand
       text: Strapi 快速开始
