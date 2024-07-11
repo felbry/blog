@@ -22,11 +22,21 @@ strapi.documents("plugin::users-permissions.user").findOne();
 strapi.db.query("plugin::my-plugin.my-plugin-content-type").findMany();
 ```
 
-## 已知的内置 service 方法（未找到整体的文档）
+## 已知的内置 service 方法
 
-只能翻 node_modules 中或 github 上的源码
+未找到整体的文档，只能翻 node_modules 中或 github 上的源码，或是 console 打印出来
 
 ```javascript
+// admin::auth
 // 将密码hash化
+console.log(strapi.service("admin::auth"));
 strapi.service("admin::auth").hashPassword(pass);
+
+// admin::user
+// 序列化？
+strapi.service("admin::user").sanitizeUser(newUser);
+
+// plugin::users-permissions.jwt
+// 签发token
+strapi.service("plugin::users-permissions.jwt").issue({ id: newUser.id });
 ```

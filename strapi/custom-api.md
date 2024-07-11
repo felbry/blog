@@ -34,3 +34,73 @@ module.exports = ({ strapi }) => ({
 :::
 
 以上文件配置好，访问`http://localhost:1337/api/wx-login`即可看到 hello world。
+
+## 完整的微信小程序登录
+
+以上测试成功之后，将 route 的 method 改为 POST，更新 controller 的代码如下：
+
+```javascript
+const axios = require("axios");
+const APP_ID = "";
+const APP_SECRET = "";
+function makeRandomPassword(length) {
+  var result = "";
+  var characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  var charactersLength = characters.length;
+  for (var i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+}
+module.exports = ({ strapi }) => ({
+  async login(ctx) {
+    const { code, userInfo } = ctx.request.body || {};
+    if (!code) {
+      return ctx.badRequest("缺少code");
+    }
+    const resData = await axios.get(
+      `https://api.weixin.qq.com/sns/jscode2session?appid=${APP_ID}&secret=${APP_SECRET}&js_code=${code}&grant_type=authorization_code`
+    );
+    if (resData.status !== 200)
+      return ctx.internalServerError("请求微信服务失败", {
+        msg: resData.statusText,
+      });
+    const { errcode, errmsg, openid } = resData.data;
+    if (errcode) return ctx.internalServerError(errmsg, resData.data);
+    let user = await strapi
+      .documents("plugin::users-permissions.user")
+      .findFirst({
+        filters: {
+          openid: {
+            $eq: openid,
+          },
+        },
+      });
+    if (!user) {
+      const randomPass = makeRandomPassword(10);
+      const hashPass = await strapi
+        .service("admin::auth")
+        .hashPassword(randomPass);
+      user = await strapi.documents("plugin::users-permissions.user").create({
+        // 通过admin面板，编辑User的Content Type，添加openid字段，右上角点击保存
+        // 此时，生成src/extensions/users-permissions/content-types/user/schema.json
+        // 编辑json文件，将非必要字段设置成非必填（因此这里创建时我们就不需要填那么多无用字段了）
+        data: {
+          password: hashPass,
+          openid,
+          confirmed: true,
+          blocked: false,
+        },
+        status: "published",
+      });
+    }
+    ctx.body = {
+      token: strapi
+        .service("plugin::users-permissions.jwt")
+        .issue({ id: user.id }),
+      user: strapi.service("admin::user").sanitizeUser(user),
+    };
+  },
+});
+```
