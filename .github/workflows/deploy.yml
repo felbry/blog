@@ -26,6 +26,9 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
+        # 加上这个with防止每次构建每篇文档的last update都更新为当前时间
+        with:
+          fetch-depth: 0
 
       # Runs a single command using the runners shell
       - name: install dep
