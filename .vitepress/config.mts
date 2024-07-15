@@ -15,6 +15,13 @@ export default defineConfig({
 
     sidebar: [
       {
+        text: "Material Design v3",
+        items: [
+          { text: "动态生成颜色", link: "/material-design/dynamic-color-gen" },
+          { text: "颜色角色", link: "/material-design/color-roles" },
+        ],
+      },
+      {
         text: "Strapi v5",
         items: [
           { text: "快速开始", link: "/strapi/quick-start" },
