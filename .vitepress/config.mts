@@ -19,6 +19,9 @@ export default defineConfig({
         items: [
           { text: "动态生成颜色", link: "/material-design/dynamic-color-gen" },
           { text: "颜色角色", link: "/material-design/color-roles" },
+          { text: "海拔", link: "/material-design/elevation" },
+          { text: "状态", link: "/material-design/states" },
+          { text: "运动/动画", link: "/material-design/motion" },
         ],
       },
       {
