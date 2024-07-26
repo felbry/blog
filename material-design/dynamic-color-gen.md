@@ -4,6 +4,10 @@
 文中关于色彩的 hue、chroma、tone 属于色彩专业知识，一般不需要关注，更多信息可以参照[Defining colors with hue, chroma, and tone (HCT)](https://m3.material.io/styles/color/system/how-the-system-works#e1e92a3b-8702-46b6-8132-58321aa600bd)
 :::
 
+## Material 主题构建
+
+https://material-foundation.github.io/material-theme-builder/ 可以在线体验定制主题效果
+
 ## 生成步骤
 
 ### 一、1 生 5
@@ -48,4 +52,12 @@ neutual 是中性的、neutral variant 中性变体
 
 ## 生成工具
 
-Material Design 也提供了配套生成颜色的 npm 库：[@material/material-color-utilities](https://www.npmjs.com/package/@material/material-color-utilities)
+Material Design 也提供了配套生成颜色的 npm 库：[@material/material-color-utilities](https://www.npmjs.com/package/@material/material-color-utilities)。
+
+但是！截止到 2024/7/19，这个库的文档并没有给出如何使用的教程。文档给出的生成方式，会缺少 surface 相关的一些变量。
+
+最新的使用参考，谁能想到藏在仓库的 issue 中：https://github.com/material-foundation/material-color-utilities/issues/101
+
+## 参考文章
+
+[使用 Material Color Utilities 为 Material Design 3 创建配色方案](https://firstlayout.net/generate-a-material-design-3-color-scheme-with-material-color-utilities/)

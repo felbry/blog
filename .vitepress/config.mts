@@ -34,6 +34,7 @@ export default defineConfig({
           { text: "表相关", link: "/strapi/table" },
         ],
       },
+      { text: "CSP", link: "/csp" },
     ],
     lastUpdated: true,
     editLink: {
