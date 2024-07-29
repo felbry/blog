@@ -7,3 +7,5 @@ MDN 针对 CSP 的配置写的比较详细：https://developer.mozilla.org/zh-CN
 http 的网站，通过 iframe 嵌套了 https 的网站，导致 https 网站请求接口失败，`failed to load response data:connection is closed, can not dispatch pending call to network.getresponseBody`。
 
 解决方案就是在当前 http 网站添加 meta 头：`<meta http-equiv="Content-Security-Policy" content="frame-src 'self' https://example.com;">`
+
+这个方案也是听别人说，有待实际场景验证。
