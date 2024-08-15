@@ -15,6 +15,14 @@ export default defineConfig({
 
     sidebar: [
       {
+        text: "Unix",
+        items: [
+          { text: "SSH", link: "/unix/ssh" },
+          { text: "Nginx", link: "/unix/nginx" },
+          { text: "rsync", link: "/unix/rsync" },
+        ],
+      },
+      {
         text: "Material Design v3",
         items: [
           { text: "动态生成颜色", link: "/material-design/dynamic-color-gen" },
