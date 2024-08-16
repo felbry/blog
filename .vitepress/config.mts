@@ -43,6 +43,7 @@ export default defineConfig({
         ],
       },
       { text: "CSP", link: "/csp" },
+      { text: "Master Go", link: "/mastergo/all" },
     ],
     lastUpdated: true,
     editLink: {
