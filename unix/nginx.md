@@ -2,28 +2,19 @@
 
 ## 安装
 
-Ubuntu 22 下安装：
-
-```bash
-sudo apt update && sudo apt upgrade
-sudo apt install nginx
-```
+[环境安装 - Nginx](./env-install#nginx)
 
 ## 常用命令
 
 ```bash
 # 查看状态（一般安装完成能自动启动）
 systemctl status nginx
-
 # 手动启动
 systemctl start nginx
-
 # 重启
 systemctl restart nginx
-
 # 测试配置文件是否正确（这个方法也能输出 配置文件的存储路径）
 nginx -t
-
 # 编辑配置文件
 vim /etc/nginx/nginx.conf
 ```
@@ -70,3 +61,19 @@ server {
 ```
 
 此时访问 ip:1111/login 找不到文件，就会尝试找 ip:1111/login/，这里找不到就访问根目录下的 /index.html 文件，当返回 index.html 文件之后，Vue Router 也在前端初始化完成，检测到页面 url 是 ip:1111/login 就会动态渲染登录页了。
+
+### 根据域名转发服务
+
+先在域名解析处配置好 A 记录，将域名指向服务器 ip 地址。
+
+随后 Nginx 监听 80 端口，根据域名转发至本地对应端口服务。
+
+```nginx
+server {
+  listen 80;
+  server_name www.example.com example.com;
+  location / {
+    proxy_pass http://localhost:3000;
+  }
+}
+```

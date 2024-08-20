@@ -17,6 +17,7 @@ export default defineConfig({
       {
         text: "Unix",
         items: [
+          { text: "环境安装", link: "/unix/env-install" },
           { text: "SSH", link: "/unix/ssh" },
           { text: "Nginx", link: "/unix/nginx" },
           { text: "rsync", link: "/unix/rsync" },
