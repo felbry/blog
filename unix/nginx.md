@@ -62,7 +62,7 @@ server {
 
 此时访问 ip:1111/login 找不到文件，就会尝试找 ip:1111/login/，这里找不到就访问根目录下的 /index.html 文件，当返回 index.html 文件之后，Vue Router 也在前端初始化完成，检测到页面 url 是 ip:1111/login 就会动态渲染登录页了。
 
-### 根据域名转发服务
+### 根据域名转发到对应端口
 
 先在域名解析处配置好 A 记录，将域名指向服务器 ip 地址。
 
@@ -77,3 +77,23 @@ server {
   }
 }
 ```
+
+::: details 不推荐阿里云的“隐性 URL”
+根据域名转发到服务器的对应端口可以从“域名解析”处配置实现，
+
+![image](https://felbry.github.io/picx-images-hosting/image.64ds4lt9qo.webp)
+
+如图所示：先配置一条 A 记录，访问`http://school.example.com`能解析到指定 ip；然后再配置一条隐性 URL，实现访问`http://imgs.example.com`实际转发为：`http://school.example.com:<端口号>`的效果。
+
+这种效果能满足一些简单场景，但如图片这类静态服务，会导致 Content-Type 头出现问题，如图所示：
+
+![image](https://felbry.github.io/picx-images-hosting/image.7w6qzi9evd.webp)
+
+最终效果就是：
+
+通过浏览器地址栏直接访问地址，会先看到访问配置的隐性 URL（响应头有问题），再访问实际的 URL（响应头没问题）
+
+通过 js 访问地址，会连续两次访问隐性 URL（响应头有问题）
+
+这可能是阿里云刻意的策略，很早之前验证的结果，后续再遇此类场景可通过动图表现下。
+:::
