@@ -24,6 +24,10 @@ export default defineConfig({
         ],
       },
       {
+        text: "编辑器",
+        items: [{ text: "Zed", link: "/editor/zed" }],
+      },
+      {
         text: "Material Design v3",
         items: [
           { text: "动态生成颜色", link: "/material-design/dynamic-color-gen" },
@@ -51,5 +55,10 @@ export default defineConfig({
       pattern: "https://github.com/felbry/blog/edit/main/:path",
     },
     socialLinks: [{ icon: "github", link: "https://github.com/felbry" }],
+  },
+  vite: {
+    server: {
+      host: "127.0.0.1",
+    },
   },
 });
