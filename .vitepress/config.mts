@@ -6,7 +6,10 @@ export default defineConfig({
   description: "个人博客",
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
-    nav: [{ text: "主页", link: "/" }],
+    nav: [
+      { text: "主页", link: "/" },
+      { text: "资源整理", link: "/resource" },
+    ],
 
     outline: {
       level: [2, 3],
