@@ -72,7 +72,7 @@ sidebar: false
 
 ### 语音生成
 
-- [ChatTTS](生成对话风格的语音) 像是真人在讲话（包括停顿、语气、笑声）
+- [ChatTTS](https://github.com/2noise/ChatTTS) 像是真人在讲话（包括停顿、语气、笑声）
 - [tiktokvoice](https://tiktokvoice.net/zh) 输入文字转成剪映内置的任意语音
 
 ### 图片编辑
