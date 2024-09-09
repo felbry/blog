@@ -43,7 +43,6 @@ sidebar: false
 
 - [Atropos](https://atroposjs.com/) 3D视差效果
 - [Canvas Confetti](https://www.kirilv.com/canvas-confetti/) 抛洒纸屑、星星
-
 - [Animista](https://animista.net/) 预览常见动画效果，可快速复制CSS代码（比较全）
 - [animastore](http://guowc.github.io/animastore/) 预览常见动画效果，可快速复制CSS代码（中文的，效果没上一个全，也不能调参数）
 
