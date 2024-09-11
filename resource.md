@@ -23,11 +23,16 @@ sidebar: false
 ## 落地页资源
 
 - [meraki ui](https://merakiui.com/)
+- [Page UI](https://pageui.shipixen.com/)
 - [uiverse](https://uiverse.io/) 3000+ 免费的UI元素，支持Tailwind
 - [ConvertFast UI](https://ui.convertfa.st/)
 - [Free Tailwind resources](https://www.tailwindawesome.com/?price=free)
 - [现成模板1 weijunext/landing-page-boilerplate](https://github.com/weijunext/landing-page-boilerplate)
 - [现成模板2 huglemon/inwind-landing-page](https://github.com/huglemon/inwind-landing-page)
+
+## NodeJS
+
+- [Jimp](https://jimp-dev.github.io/jimp/) 图片处理（各种操作图片的API）
 
 ## 前端低频/特殊场景（库/资源）
 
@@ -39,6 +44,7 @@ sidebar: false
 - [免费下载实时更新的geoJSON数据](https://github.com/TangSY/echarts-map-demo)
 - [lordicon](https://lordicon.com/) 部分免费的动态SVG图标
 - [cssfilter](https://www.cssfilters.co/) css filter滤镜各种参数 可视化设置
+- [CSS Style Observer](https://github.com/bramus/style-observer) 监听CSS属性值的变化触发回调
 
 拖拉拽
 - [Vue Fluid DnD](https://vue-fluid-dnd.netlify.app/)
@@ -161,6 +167,10 @@ Canvas引擎
 ### 软考
 
 - [软考高级架构师备考记录](https://nekonull.me/posts/ruankao-architect/)
+
+### Devtool
+
+- [Caching demystified: Inspect, clear, and disable caches](https://www.youtube.com/watch?v=mSMb-aH6sUw)
 
 ### 定位/自动化/IP池
 
