@@ -38,13 +38,16 @@ sidebar: false
 
 - [WebTracing](https://m-cheng-web.github.io/web-tracing/) 前端监控
 - [blog cells](https://github.com/rameshvarun/blog-cells) 在网页中运行js交互代码，甚至是python
-- [HiPrint](http://hiprint.io/) 打印
 - [AIEmoji](https://ai-emoji.bettergogo.com/) 自然语言搜索Emoji
 - [通过正则去掉Emoji](https://taxodium.ink/post/emoji-regexp/) Emoji正则匹配
 - [免费下载实时更新的geoJSON数据](https://github.com/TangSY/echarts-map-demo)
 - [lordicon](https://lordicon.com/) 部分免费的动态SVG图标
 - [cssfilter](https://www.cssfilters.co/) css filter滤镜各种参数 可视化设置
 - [CSS Style Observer](https://github.com/bramus/style-observer) 监听CSS属性值的变化触发回调
+
+打印
+- [HiPrint](http://hiprint.io/) 打印库
+- [怎么写 CSS 的打印样式](https://voussoir.net/writing/css_for_printing)
 
 拖拉拽
 - [Vue Fluid DnD](https://vue-fluid-dnd.netlify.app/)
@@ -73,6 +76,7 @@ Canvas引擎
 - [GammaRay](https://github.com/RGAA-Software/GammaRay) 不同设备之间推流
 - [Webp Server Go](https://github.com/webp-sh/webp_server_go) 代理图片，将图片转为WebP/AVIF格式，达到压缩图片体积的目的
 - [mcfly](https://github.com/cantino/mcfly) 快速查找shell历史纪录，定位到需要的命令（目前在zsh环境下没试成功）
+- [Certimate](https://github.com/usual2970/certimate) 一个自搭建的开源平台，可以为自己的域名申请、部署、续期 SSL 证书
 
 ### 服务器运维
 

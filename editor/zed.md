@@ -1,5 +1,29 @@
 # Zed
 
+## 常用配置
+
+[自动换行](https://zed.dev/docs/configuring-zed#soft-wrap)
+```json
+{ "soft_wrap": "editor_width" }
+```
+[TabSize](https://zed.dev/docs/configuring-zed#tab-size)
+```json
+{ "tab_size": 2 }
+```
+[失焦自动保存](https://zed.dev/docs/configuring-zed#autosave)
+```json
+{ "autosave": "on_focus_change" }
+```
+
+## 项目级别的配置
+
+每个项目的配置可能有差异：
+
+- 不同项目的缩进不一致
+- 有的项目用ESLint格式化，有的项目用prettier
+
+通过在项目根目录创建`.zed/settings.json`进行配置（也可以`Command + Shift + P`，选择`zed: open local settings`快捷创建）
+
 ## LSP（Language Server Protocol）
 
 一种语言文件 可对应 多个LSP。
@@ -43,8 +67,23 @@
 
 ### 自定义某个LSP的配置
 
+::: tip
+以下lsp的配置中，出现了`init_options`、`settings`、`initialization_options`等字段，具体取决于每个lsp自身的配置方式。
+
+比如配置emmet，在[zed文档 - Emmet](https://zed.dev/docs/languages/emmet)中，查看对应的lsp文档，能清楚看到`init_options`和其配置项的说明。
+:::
+
 ```json
 "lsp": {
+  "emmet": {
+    "init_options": {
+      "includeLanguages": {
+        // vue-html应该是指template部分，vue覆盖的更全，就是整个vue文件，如果两个都配上没遇到啥问题，就多多益善吧。
+        "vue-html": "html",
+        "vue": "html"
+      }
+    }
+  },
   "eslint": {
     "settings": {
       "codeActionOnSave": {

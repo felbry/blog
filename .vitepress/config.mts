@@ -20,6 +20,7 @@ export default defineConfig({
       // "/team-management": [{ text: "Git", link: "/team-management/git" }],
       "/": [
         { text: "简介", link: "/summary" },
+        { text: "Taro", link: "/taro" },
         {
           text: "Unix",
           items: [
