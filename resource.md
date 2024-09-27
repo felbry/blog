@@ -80,7 +80,7 @@ Canvas引擎
 
 ### 服务器运维
 
-- [Coolify](https://coolify.io/) 开源且可自托管的 Heroku / Netlify / Vercel 替代品
+- ~[Coolify](https://coolify.io/) 开源且可自托管的 Heroku / Netlify / Vercel 替代品~ 2024/9/27 看了文档，好像有些简陋。看首页介绍的功能挺多的，文档上体现的较少，暂时放弃。
 - [1Panel](https://github.com/1Panel-dev/1Panel) Linux服务器运维管理面板：应用商店/网站/数据库/容器/定时任务
 - [Kopia](https://github.com/kopia/kopia/) 备份/恢复工具，快照保存到云存储/服务器/本地计算机上，可以指定文件/目录。有命令行和图形化界面。
 

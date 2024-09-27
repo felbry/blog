@@ -1,5 +1,17 @@
 # SSH
 
+## 生成key
+
+`ssh-keygen`
+
+## 查看key
+
+`cat ~/.ssh/id_rsa.pub`
+
+## 测试本地是否能连接远程
+
+`ssh -T git@gitlab.com`
+
 ## 重置系统，本地连不上
 
 重置系统了（把 centos 换 ubuntu 了），再连服务器就报错了：
