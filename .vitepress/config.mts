@@ -39,6 +39,13 @@ export default defineConfig({
           items: [{ text: "Git使用规范", link: "/team-management/git" }],
         },
         {
+          text: "SVG",
+          items: [
+            { text: "SVG基础", link: "/svg/base" },
+            { text: "认识Stroke和Dash", link: "/svg/learn-stroke-and-dash" },
+          ],
+        },
+        {
           text: "Material Design v3",
           items: [
             {
@@ -61,6 +68,7 @@ export default defineConfig({
             { text: "表相关", link: "/strapi/table" },
           ],
         },
+        { text: "使用@vue/repl 定制 Playground", link: "/vue-repl-playground" },
         { text: "CSP", link: "/csp" },
         { text: "Master Go", link: "/mastergo/all" },
       ],
