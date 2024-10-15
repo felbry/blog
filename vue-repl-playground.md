@@ -19,14 +19,6 @@ Element Plus 的交互已经做的足够好，但从我个人写博客角度来�
 
 这里我们参照[element-plus/docs/en-US/component/button.md](https://github.com/element-plus/element-plus/blob/dev/docs/en-US/component/button.md?plain=1)的格式，其中预览组件的核心代码如下：
 
-```markdown
-:::demo Use `disabled` attribute to determine whether a button is disabled. It accepts a `Boolean` value.
-
-button/disabled
-
-:::
-```
-
 通过`:::demo`开头，`:::`结尾。中间包裹一个示例代码文件的相对路径，`:::demo`之后也可以补充一些描述。
 
 ## 实现思路
@@ -213,15 +205,141 @@ Token {
 - 去掉 useSourceCode 的引入，主要是通过 props.path 得出 github url，后续自己实现
 - 去掉 usePlayground 的引入，主要是跳转 playground，后续自己实现
 - 替换 CSS 变量，文件里有一些`--bg-color`、`--el-text-color-secondary`这类变量，可以替换成 vitepress 主题的变量，更适配主题（TODO）
-- 将`render`函数中使用的`<ep-${sourceFile.replaceAll('/', '-')}/>`组件依次注入 markdown 文件
 
-  一开始我考虑的是在 `<Demo></Demo>`组件中，通过`props.path`得到组件名，然后通过`import`引入，利用 `defineAsyncComponent` 和 `<component />`组件 实现异步加载。但是这种方式仅限于开发环境（即有本地服务器的情况下）。打包时由于是动态引入，`path`还没传入，相关组件均不会被打包，导致打包后 example 的示例均不能展示。
+### 实现 vite 插件，在构建时将 Demo 组件的 import 语句注入对应 markdown 文件
 
-  那就只有参照 Element Plus 的方式，在构建前，将组件的引入语句追加进 markdown 了。参见[docs/.vitepress/config/vite.ts - MarkdownTransform](https://github.com/element-plus/element-plus/blob/ba59b5d20eb486d50bac06f71d5c2b809ec0d942/docs/.vitepress/config/vite.ts#L111)
+::: info PS
+有考虑过在 markdown 中写`:::demo`和`<Demo>`的成本，一开始认为基本一样，无非是多写了些`import`组件的语句，但好处是可以简洁明了的给`<Demo>`组件传参，灵活性更高。但并非如此，看看`plugins/markdown/demo.js`中对`<Demo>`组件注入的属性就知道多麻烦了。
+:::
 
-## 测试
+在`render`函数中，有这样一段代码：`<ep-${sourceFile.replaceAll('/', '-')}/>`。是根据`sourceFile`名称生成的组件名，分析代码会发现，它是和每个 Demo 组件一一对应的。但是主 markdown 文件并没有引入注册这些组件。因此需要在 vite 构建工具里实现提前注入 import 语句。
 
-:::demo Use `disabled` attribute to determine whether a button is disabled. It accepts a `Boolean` value.
+::: info PPS
+一开始我考虑的是在 `<Demo>`组件中，通过`props.path`得到组件名，然后利用 `defineAsyncComponent`、动态`import`、`<component />`组件 实现异步加载。但这种方式仅限于开发环境（即有本地服务器的情况下）。打包时由于是动态引入，`path`还没传入，相关组件均不会被打包，导致打包后 examples 下 的组件均不能展示。
+:::
+
+Element Plus 实现了一个 MarkdownTransform 的 vite 插件：[docs/.vitepress/config/vite.ts - MarkdownTransform](https://github.com/element-plus/element-plus/blob/ba59b5d20eb486d50bac06f71d5c2b809ec0d942/docs/.vitepress/config/vite.ts#L111)，弊端是生成的`import`语句引入路径是写死的，这就要求文档和 examples 的路径一开始就约定好，不能变动。
+
+由于博客文档的路径多样，也为了适配更多项目。我将引入路径作为 frontmatter 配置项，并提供默认值。
+
+完整实现如下：
+
+::: info PPPS
+在插件的`transform`钩子中，一开始我没有去遍历页面同名文件夹下的文件而是通过正则从 markdown 内容中提取，这种方式无法区分 markdown 文件中注释的、示例的 demo 块。还是 Element Plus 的好点，直接引入该页面同名文件夹下的所有文件，倒逼你先去创建 Demo 文件。
+:::
+
+::: info PPPPS
+Element Plus 解析`:::demo`后的内容作为 description，我觉得有些浪费空间了。description 完全可以以 markdown 形式写在 demo 块前。而`:::demo`后的空间我作为`<Demo>`组件的额外传参用。比如：`:::demo [is-hidden-ops :is-show-source="false"]`
+:::
+
+::: code-group
+
+```markdown [文档示范.md]
+---
+relativeExamples: ../../
+---
+
+:::demo
+
+vue-repl-playground/test
+
+\::: <!-- 前面加个斜线，是因为避免 :::code-group 的解析错误 -->
+```
+
+```js [./vitepress/config.js]
+import path from 'path'
+import mdContainer from 'markdown-it-container'
+import createDemoContainer from './plugins/markdown/demo.js'
+import appendDemoImportsToMd from './plugins/vite/append-imports-to-markdown.js'
+export default {
+  markdown: {
+    config: (md) => md.use(mdContainer, 'demo', createDemoContainer(md)),
+  },
+  vite: {
+    plugins: [{ examplesRoot: path.resolve('examples') }],
+  },
+}
+```
+
+```js [./vitepress/plugins/markdown/demo.js]
+import path from 'path'
+import fs from 'fs'
+export default function createDemoContainer(md) {
+  return {
+    validate(params) {
+      return !!params.trim().match(/^demo\s*(.*)$/)
+    },
+
+    render(tokens, idx) {
+      // 这里只能获取到 token 字符串信息，已知examples路径，后续拼接的字符串都需要提供
+      const m = tokens[idx].info.trim().match(/^demo\s*\[(.*?)\].*$/)
+      if (tokens[idx].nesting === 1 /* means the tag is opening */) {
+        const otherProps = m && m.length > 1 ? m[1] : ''
+        const sourceFileToken = tokens[idx + 2]
+        let source = ''
+        const sourceFile = sourceFileToken.children?.[0].content ?? ''
+        if (sourceFileToken.type === 'inline') {
+          source = fs.readFileSync(path.resolve('examples', `${sourceFile}.vue`), 'utf-8')
+        }
+        if (!source) throw new Error(`Incorrect source file: ${sourceFile}`)
+        return `<Demo source="${encodeURIComponent(
+          md.render(`\`\`\` vue\n${source}\`\`\``)
+        )}" path="${sourceFile}" raw-source="${encodeURIComponent(source)}"${
+          otherProps ? ` ${otherProps}` : ''
+        }>
+      <template #source><exp-${sourceFile.replaceAll('/', '-')}/></template>`
+      } else {
+        return '</Demo>\n'
+      }
+    },
+  }
+}
+```
+
+```js [./vitepress/plugins/vite/append-imports-to-markdown.js]
+import path from 'path'
+import fs from 'fs'
+import { camelize } from '@vue/shared'
+export default function appendImportsToMarkdown(options = {}) {
+  const { examplesRoot } = options
+  const relativeExamples = './' // 文档相对examples文件夹的位置，可通过frontmatter自定义
+  return {
+    name: 'append-imports-to-markdown',
+    enforce: 'pre',
+    transform(content, filename) {
+      if (!filename.endsWith('.md')) return
+      const pageId = path.basename(filename, '.md') // 当前文档名称
+      const pageDemoRoot = path.resolve(examplesRoot, pageId)
+      if (!fs.existsSync(pageDemoRoot)) return // 如果examples下没有当前文档的同名目录，返回
+      const customRelativeExamples = '' // TODO: 后续从content的frontmatter中解析出来
+      const files = fs.readdirSync(pageDemoRoot)
+      const imports = []
+      for (const item of files) {
+        if (!/\.vue$/.test(item)) continue
+        const file = item.replace(/\.vue$/, '')
+        const name = camelize(`Exp-${pageId}-${file}`)
+        imports.push(
+          `import ${name} from '${
+            customRelativeExamples || relativeExamples
+          }examples/${pageId}/${item}'`
+        )
+      }
+      return (content += `\n<script setup>\n
+        ${imports.join('\n')}
+      </script>\n
+      `)
+    },
+  }
+}
+```
+
+:::
+
+## 最终效果
+
+description....
+
+::: demo
 
 vue-repl-playground/test
 

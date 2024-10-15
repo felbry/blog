@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, getCurrentInstance, ref, toRef, defineAsyncComponent } from 'vue'
+import { computed, getCurrentInstance, ref, toRef } from 'vue'
 import { useClipboard, useToggle } from '@vueuse/core'
 import { CaretTop } from '@element-plus/icons-vue'
 import SourceCode from './vp-source-code.vue'
@@ -8,13 +8,7 @@ const props = defineProps<{
   source: string
   path: string
   rawSource: string
-  description: string
 }>()
-
-const currentComp = computed(() => {
-  const fullPath = `../examples/${props.path}.vue`
-  return defineAsyncComponent(() => import(fullPath))
-})
 
 const vm = getCurrentInstance()!
 
@@ -26,8 +20,6 @@ const { copy, isSupported } = useClipboard({
 const [sourceVisible, toggleSourceVisible] = useToggle()
 
 const sourceCodeRef = ref<HTMLButtonElement>()
-
-const decodedDescription = computed(() => decodeURIComponent(props.description))
 
 const onPlaygroundClick = () => {
   const { $message } = vm.appContext.config.globalProperties
@@ -57,16 +49,9 @@ const copyCode = async () => {
 </script>
 
 <template>
-  <!-- danger here DO NOT USE INLINE SCRIPT TAG -->
-  <div
-    text="sm"
-    m="y-4"
-    v-html="decodedDescription"
-  />
-
   <div class="example">
     <div class="example-showcase">
-      <component :is="currentComp" />
+      <slot name="source" />
     </div>
     <hr style="margin: 0" />
     <div class="op-btns">

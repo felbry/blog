@@ -1,6 +1,8 @@
 import { defineConfig } from 'vitepress'
+import path from 'path'
 import mdContainer from 'markdown-it-container'
-import createDemoContainer from './plugins/demo.js'
+import createDemoContainer from './plugins/markdown/demo.js'
+import appendDemoImportsToMd from './plugins/vite/append-imports-to-markdown.js'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -22,8 +24,10 @@ export default defineConfig({
       // "/team-management": [{ text: "Git", link: "/team-management/git" }],
       '/': [
         { text: '简介', link: '/summary' },
-        { text: '使用@vue/repl 定制 Playground', link: '/vue-repl-playground' },
-        { text: 'Taro', link: '/taro' },
+        {
+          text: '构建工具',
+          items: [{ text: 'Vite 和 Rollup 插件开发', link: '/build-tools/vite-and-rollup-plugin' }],
+        },
         {
           text: 'Unix',
           items: [
@@ -71,8 +75,11 @@ export default defineConfig({
             { text: '表相关', link: '/strapi/table' },
           ],
         },
+        { text: '使用@vue/repl 定制 Playground', link: '/vue-repl-playground' },
+        { text: 'Node.js 常用 API', link: '/nodejs-api' },
         { text: 'CSP', link: '/csp' },
         { text: 'Master Go', link: '/mastergo/all' },
+        { text: 'Taro', link: '/taro' },
       ],
     },
     lastUpdated: true,
@@ -88,5 +95,6 @@ export default defineConfig({
     server: {
       host: '127.0.0.1',
     },
+    plugins: [appendDemoImportsToMd({ examplesRoot: path.resolve('examples') })],
   },
 })
