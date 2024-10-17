@@ -25,10 +25,13 @@ export default function appendImportsToMarkdown(options = {}) {
           }examples/${pageId}/${item}'`
         )
       }
-      return (content += `\n<script setup>\n
+      return (
+        content +
+        `\n<script setup>\n
         ${imports.join('\n')}
       </script>\n
-      `)
+      `
+      )
     },
   }
 }

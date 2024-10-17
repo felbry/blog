@@ -1,17 +1,9 @@
 <template>
-  <div>1234-567</div>
-  <div>1234-567</div>
-  <div>1234-567</div>
-  <div>1234-567</div>
-  <div>1234-567</div>
-  <div>1234-567</div>
-  <div>1234-567</div>
-  <div>1234-567</div>
-  <div>1234-567</div>
+  <div>{{ msg }}</div>
   <hr />
-  <div>1234-567</div>
-  <div>1234-567</div>
-  <div>1234-567</div>
-  <div>1234-567</div>
+  <div>world</div>
 </template>
-<script setup lang="ts"></script>
+<script setup>
+import { ref } from 'vue'
+const msg = 'hello'
+</script>

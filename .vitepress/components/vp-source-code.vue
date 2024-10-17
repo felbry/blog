@@ -29,7 +29,7 @@ const decoded = computed(() => {
   </div>
 </template>
 
-<style scoped lang="less">
+<style scoped>
 :deep(.language-vue) {
   margin: 0 !important;
   border-radius: 0 !important;

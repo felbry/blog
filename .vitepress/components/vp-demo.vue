@@ -1,50 +1,44 @@
-<script setup lang="ts">
-import { computed, getCurrentInstance, ref, toRef } from 'vue'
+<script setup>
+import { computed, ref, toRef } from 'vue'
 import { useClipboard, useToggle } from '@vueuse/core'
-import { CaretTop } from '@element-plus/icons-vue'
+import { usePlayground } from '../composables/use-playground.js'
 import SourceCode from './vp-source-code.vue'
 
-const props = defineProps<{
-  source: string
-  path: string
-  rawSource: string
-}>()
-
-const vm = getCurrentInstance()!
+const props = defineProps({
+  source: String,
+  path: String,
+  rawSource: String,
+  isShowRawSourcePermanently: {
+    type: Boolean,
+  },
+  isHiddenOps: {
+    type: Boolean,
+  },
+})
 
 const { copy, isSupported } = useClipboard({
   source: decodeURIComponent(props.rawSource),
   read: false,
 })
+const isCopied = ref(false)
+const copyCode = async () => {
+  if (!isSupported) return
+  try {
+    await copy()
+    isCopied.value = true
+    setTimeout(() => {
+      isCopied.value = false
+    }, 1500)
+  } catch (e) {
+    console.error(e.message)
+  }
+}
 
 const [sourceVisible, toggleSourceVisible] = useToggle()
 
-const sourceCodeRef = ref<HTMLButtonElement>()
-
 const onPlaygroundClick = () => {
-  const { $message } = vm.appContext.config.globalProperties
-  $message.success('playground待实现')
-}
-
-const onSourceVisibleKeydown = (e: KeyboardEvent) => {
-  if (['Enter', 'Space'].includes(e.code)) {
-    e.preventDefault()
-    toggleSourceVisible(false)
-    sourceCodeRef.value?.focus()
-  }
-}
-
-const copyCode = async () => {
-  const { $message } = vm.appContext.config.globalProperties
-  if (!isSupported) {
-    $message.error('复制出错')
-  }
-  try {
-    await copy()
-    $message.success('复制成功')
-  } catch (e: any) {
-    $message.error(e.message)
-  }
+  const { link } = usePlayground(props.rawSource)
+  window.open(link)
 }
 </script>
 
@@ -54,112 +48,157 @@ const copyCode = async () => {
       <slot name="source" />
     </div>
     <hr style="margin: 0" />
-    <div class="op-btns">
-      <ElTooltip
-        content="编辑器中编辑"
-        :show-arrow="false"
-        :trigger="['hover', 'focus']"
-        :trigger-keys="[]"
+    <div
+      class="op-btns"
+      v-if="!isHiddenOps"
+    >
+      <div
+        tooltip="编辑器中编辑"
+        position="bottom"
+        @click="onPlaygroundClick"
       >
-        <ElIcon
-          :size="16"
-          tabindex="0"
-          role="link"
-          class="op-btn"
-          @click="onPlaygroundClick"
-          @keydown.prevent.enter="onPlaygroundClick"
-          @keydown.prevent.space="onPlaygroundClick"
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="icon"
         >
-          <!-- <i-ri-flask-line /> -->222
-        </ElIcon>
-      </ElTooltip>
-      <ElTooltip
-        content="Github中编辑"
-        :show-arrow="false"
-        :trigger="['hover', 'focus']"
-        :trigger-keys="[]"
+          <path
+            stroke="none"
+            d="M0 0h24v24H0z"
+            fill="none"
+          />
+          <path d="M9 3l6 0" />
+          <path d="M10 9l4 0" />
+          <path d="M10 3v6l-4 11a.7 .7 0 0 0 .5 1h11a.7 .7 0 0 0 .5 -1l-4 -11v-6" />
+        </svg>
+      </div>
+      <div
+        :tooltip="isCopied ? '复制成功' : '复制代码'"
+        position="bottom"
       >
-        <ElIcon
-          :size="16"
-          class="op-btn github"
-          style="color: var(--text-color-light)"
+        <svg
+          v-if="isCopied"
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="green"
+          stroke-width="1"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="icon"
         >
-          <a
-            href="https://www.baidu.com"
-            rel="noreferrer noopener"
-            target="_blank"
-          >
-            <!-- <i-ri-github-line /> -->
-            333
-          </a>
-        </ElIcon>
-      </ElTooltip>
-      <ElTooltip
-        content="复制代码"
-        :show-arrow="false"
-        :trigger="['hover', 'focus']"
-        :trigger-keys="[]"
-      >
-        <ElIcon
-          :size="16"
-          class="op-btn"
-          tabindex="0"
-          role="button"
+          <path
+            stroke="none"
+            d="M0 0h24v24H0z"
+            fill="none"
+          />
+          <path d="M5 12l5 5l10 -10" />
+        </svg>
+        <svg
+          v-else
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="icon"
           @click="copyCode"
-          @keydown.prevent.enter="copyCode"
-          @keydown.prevent.space="copyCode"
         >
-          <!-- <i-ri-file-copy-line /> -->111
-        </ElIcon>
-      </ElTooltip>
-      <ElTooltip
-        :content="sourceVisible ? '隐藏代码' : '查看代码'"
-        :show-arrow="false"
-        :trigger="['hover', 'focus']"
-        :trigger-keys="[]"
+          <path
+            stroke="none"
+            d="M0 0h24v24H0z"
+            fill="none"
+          />
+          <path
+            d="M7 7m0 2.667a2.667 2.667 0 0 1 2.667 -2.667h8.666a2.667 2.667 0 0 1 2.667 2.667v8.666a2.667 2.667 0 0 1 -2.667 2.667h-8.666a2.667 2.667 0 0 1 -2.667 -2.667z"
+          />
+          <path
+            d="M4.012 16.737a2.005 2.005 0 0 1 -1.012 -1.737v-10c0 -1.1 .9 -2 2 -2h10c.75 0 1.158 .385 1.5 1"
+          />
+        </svg>
+      </div>
+      <div
+        v-if="!isShowRawSourcePermanently"
+        :tooltip="sourceVisible ? '隐藏代码' : '查看代码'"
+        position="bottom"
+        @click="toggleSourceVisible()"
       >
-        <button
-          ref="sourceCodeRef"
-          class="reset-btn el-icon op-btn"
-          @click="toggleSourceVisible()"
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="icon"
         >
-          <ElIcon :size="16">
-            <!-- <i-ri-code-line /> -->
-            444
-          </ElIcon>
-        </button>
-      </ElTooltip>
+          <path
+            stroke="none"
+            d="M0 0h24v24H0z"
+            fill="none"
+          />
+          <path d="M7 8l-4 4l4 4" />
+          <path d="M17 8l4 4l-4 4" />
+          <path d="M14 4l-4 16" />
+        </svg>
+      </div>
     </div>
 
-    <ElCollapseTransition>
-      <SourceCode
-        :visible="sourceVisible"
-        :source="source"
-      />
-    </ElCollapseTransition>
+    <SourceCode
+      :visible="isShowRawSourcePermanently || sourceVisible"
+      :source="source"
+    />
 
-    <Transition name="el-fade-in-linear">
-      <div
-        v-show="sourceVisible"
-        class="example-float-control"
-        tabindex="0"
-        role="button"
-        @click="toggleSourceVisible(false)"
-        @keydown="onSourceVisibleKeydown"
+    <div
+      v-if="!isShowRawSourcePermanently"
+      v-show="sourceVisible"
+      class="example-float-control"
+      @click="toggleSourceVisible(false)"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="icon icon-tabler icons-tabler-outline icon-tabler-caret-up"
       >
-        <ElIcon :size="16">
-          <CaretTop />
-        </ElIcon>
-        <span>隐藏代码</span>
-      </div>
-    </Transition>
+        <path
+          stroke="none"
+          d="M0 0h24v24H0z"
+          fill="none"
+        />
+        <path d="M18 14l-6 -6l-6 6h12" />
+      </svg>
+      <span>隐藏代码</span>
+    </div>
   </div>
 </template>
 
 <style scoped lang="less">
 .example {
   border: 1px solid var(--vp-c-border);
-  border-radius: var(--el-border-radius-base);
+  border-radius: 4px;
 
   .example-showcase {
     padding: 1.5rem;
@@ -172,28 +211,14 @@ const copyCode = async () => {
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    gap: 12px;
     height: 2.5rem;
+    color: var(--vp-c-text-2);
 
-    .el-icon {
-      &:hover {
-        color: var(--vp-c-text-1);
-      }
-    }
-
-    .op-btn {
-      margin: 0 0.5rem;
+    .icon:hover {
+      color: var(--vp-c-text-1);
+      stroke-width: 2;
       cursor: pointer;
-      color: var(--vp-c-text-2);
-      transition: 0.2s;
-
-      &.github a {
-        transition: 0.2s;
-        color: var(--vp-c-text-2);
-
-        &:hover {
-          color: var(--vp-c-text-1);
-        }
-      }
     }
   }
 
@@ -201,14 +226,14 @@ const copyCode = async () => {
     display: flex;
     align-items: center;
     justify-content: center;
-    border-top: 1px solid var(--border-color);
+    border-top: 1px solid var(--vp-c-divider);
     height: 44px;
     box-sizing: border-box;
-    background-color: var(--bg-color, #fff);
+    background-color: var(--vp-c-bg);
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
     margin-top: -1px;
-    color: var(--el-text-color-secondary);
+    color: var(--vp-c-text-2);
     cursor: pointer;
     position: sticky;
     left: 0;
@@ -221,8 +246,53 @@ const copyCode = async () => {
     }
 
     &:hover {
-      color: var(--el-color-primary);
+      color: var(--vp-c-indigo-1);
     }
   }
+}
+
+// tooltip
+[tooltip] {
+  position: relative;
+  display: inline-block;
+}
+[tooltip]::before {
+  content: '';
+  position: absolute;
+  border-width: 4px 6px 0 6px;
+  border-style: solid;
+  border-color: transparent;
+  border-top-color: var(--vp-c-neutral);
+  z-index: 99;
+  opacity: 0;
+}
+[tooltip]::after {
+  content: attr(tooltip);
+  position: absolute;
+  background: var(--vp-c-neutral);
+  text-align: center;
+  color: var(--vp-c-neutral-inverse);
+  border-radius: 5px;
+  padding: 4px 2px;
+  min-width: 80px;
+  pointer-events: none;
+  z-index: 99;
+  opacity: 0;
+}
+[tooltip]:hover::after,
+[tooltip]:hover::before {
+  opacity: 1;
+}
+[tooltip][position='bottom']::before {
+  top: 100%;
+  left: 50%;
+  margin-top: 1px;
+  transform: translatex(-50%) rotate(180deg);
+}
+[tooltip][position='bottom']::after {
+  top: 100%;
+  left: 50%;
+  margin-top: 5px;
+  transform: translatex(-50%);
 }
 </style>

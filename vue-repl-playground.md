@@ -1,29 +1,29 @@
-# 使用@vue/repl 定制 Playground
+# 参考 Element Plus Demo 和 Vue SFC Playground 自定义预览组件
 
 ![image](https://felbry.github.io/picx-images-hosting/image.6bh22961ab.webp)
 
-主流的组件库都有这样的预览功能，比如上图所示的[Element Plus - Button](https://element-plus.org/zh-CN/component/button.html#%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95)。在预览之外，还有代码展示，Playground 交互演练场等功能。
+主流的组件库都有这样的预览功能，比如上图所示的[Element Plus - Button](https://element-plus.org/zh-CN/component/button.html#%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95)。在预览之外，还有代码展示，Playground 等功能
 
 Element Plus 的交互已经做的足够好，但从我个人写博客角度来看，还有以下诉求：
 
-- 源码可以通过配置决定是否常驻展示（因为示例代码要考虑 SEO）
-- playground 要在当前页面全屏打开，而不是另一个独立外链增加加载时间成本
-- playground 的环境最好是预集成好的，比如通过 CDN 加载一些需要的库
+- 源码可以通过配置决定是否常驻展示
+- playground 要能快速加载，像 Element Plus 的在我的网络环境下就要加载很久
+- playground 的预置环境是可以自定义的，比如通过 CDN 加载一些需要的库
 - ...
 
-以上个性化需求都需要针对性开发，因此可以参照 Element Plus 和@vue/repl 的代码，实现一个功能更加丰富的预览组件。
+以上个性化需求都需要针对性开发，因此可以参考 Element Plus 和@vue/repl 的代码，实现一个更符合个人需求的预览组件
 
 ## 约定使用规范
 
-在实现预览组件前，先要约定如何使用。
+在实现预览组件前，先要约定如何使用
 
 这里我们参照[element-plus/docs/en-US/component/button.md](https://github.com/element-plus/element-plus/blob/dev/docs/en-US/component/button.md?plain=1)的格式，其中预览组件的核心代码如下：
 
-通过`:::demo`开头，`:::`结尾。中间包裹一个示例代码文件的相对路径，`:::demo`之后也可以补充一些描述。
+通过`:::demo`开头，`:::`结尾。中间包裹一个示例代码文件的相对路径，`:::demo`之后也可以补充一些描述
 
 ## 实现思路
 
-通过使用规范，我们可以得出预览组件是利用了 vitepress 的[Markdown 扩展](https://vitepress.dev/zh/guide/markdown#advanced-configuration)实现的。
+从使用规范那里，我们可以得出“产出预览组件代码片段”是利用了 vitepress 的[Markdown 扩展](https://vitepress.dev/zh/guide/markdown#advanced-configuration)实现的
 
 因此从 Element Plus 的 vitepress 配置文件入手：[element-plus/docs/.vitepress/config/index.mts](https://github.com/element-plus/element-plus/blob/dev/docs/.vitepress/config/index.mts)，看到配置了如下代码：
 
@@ -194,7 +194,7 @@ Token {
 
 :::
 
-可以看到很多信息，但是以目的为导向，我们只需要解析`tokens[idx + 2]`的数据即可。
+可以看到很多信息，但是以目的为导向，我们只需要解析`tokens[idx + 2]`的数据即可
 
 回头再看 Element Plus 的代码，就比较清晰了。接着就是看下`<Demo></Demo>`组件了。文件路径为：[element-plus/docs/.vitepress/vitepress/components/vp-demo.vue](https://github.com/element-plus/element-plus/blob/dev/docs/.vitepress/vitepress/components/vp-demo.vue)
 
@@ -202,34 +202,63 @@ Token {
 
 - 安装 @vueuse/core、@element-plus
 - 替换 locale 相关代码
-- 去掉 useSourceCode 的引入，主要是通过 props.path 得出 github url，后续自己实现
-- 去掉 usePlayground 的引入，主要是跳转 playground，后续自己实现
-- 替换 CSS 变量，文件里有一些`--bg-color`、`--el-text-color-secondary`这类变量，可以替换成 vitepress 主题的变量，更适配主题（TODO）
+- 去掉 useSourceCode 的引入，主要是通过 props.path 得出 github url，对文档库别人反馈有用，对个人博客用处不大，后续按需实现
+- 更新 usePlayground，跳转至[Vue SFC Playground](https://play.vuejs.org)
+
+  ```js
+  function utoa(data) {
+    return btoa(unescape(encodeURIComponent(data)))
+  }
+  const MAIN_FILE_NAME = 'App.vue'
+  const IMPORT_MAP_FILE_NAME = 'import-map.json'
+  export const usePlayground = (source) => {
+    const code = decodeURIComponent(source)
+    const originCode = {
+      [MAIN_FILE_NAME]: code,
+      // [IMPORT_MAP_FILE_NAME]: `{
+      //   "imports": {
+      //     "vue": "https://play.vuejs.org/vue.runtime.esm-browser.js",
+      //     "vue/server-renderer": "https://play.vuejs.org/server-renderer.esm-browser.js",
+      //     "dayjs": "https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"
+      //   }
+      // }`,
+    }
+    const link = `https://play.vuejs.org/#${utoa(JSON.stringify(originCode))}`
+    return {
+      link,
+    }
+  }
+  ```
+
+  Vue SFC Playground 是基于@vue/repl 二次封装，考虑到高频场景就是 传输若干文件内容 + 一些`import`语句，为了省事，我们直接使用了它。如果后续还有更多个性化需求，比如要注入其它文件`import map`不满足的，就可以使用[@vue/repl Repl.vue](https://github.com/vuejs/repl/blob/main/src/Repl.vue)的`previewOptions`选项，其中`headHTML`、`customCode`都有妙用
+
+- 替换 CSS 变量，文件里有一些`--bg-color`、`--el-text-color-secondary`这类变量，可以替换成 [vitepress 主题的变量](https://github.com/vuejs/vitepress/blob/main/src/client/theme-default/styles/vars.css)，更适配主题
+- 去 Element Plus，将相关组件（含 Icon）都移除换成原生的，减少依赖
 
 ### 实现 vite 插件，在构建时将 Demo 组件的 import 语句注入对应 markdown 文件
 
 ::: info PS
-有考虑过在 markdown 中写`:::demo`和`<Demo>`的成本，一开始认为基本一样，无非是多写了些`import`组件的语句，但好处是可以简洁明了的给`<Demo>`组件传参，灵活性更高。但并非如此，看看`plugins/markdown/demo.js`中对`<Demo>`组件注入的属性就知道多麻烦了。
+有考虑过在 markdown 中写`:::demo`和`<Demo>`的成本，一开始认为基本一样，无非是多写了些`import`组件的语句，但好处是可以简洁明了的给`<Demo>`组件传参，灵活性更高。但并非如此，看看`plugins/markdown/demo.js`中对`<Demo>`组件注入的属性就知道多麻烦了
 :::
 
-在`render`函数中，有这样一段代码：`<ep-${sourceFile.replaceAll('/', '-')}/>`。是根据`sourceFile`名称生成的组件名，分析代码会发现，它是和每个 Demo 组件一一对应的。但是主 markdown 文件并没有引入注册这些组件。因此需要在 vite 构建工具里实现提前注入 import 语句。
+在`render`函数中，有这样一段代码：`<ep-${sourceFile.replaceAll('/', '-')}/>`。是根据`sourceFile`名称生成的组件名，分析代码会发现，它是和每个 Demo 组件一一对应的。但是主 markdown 文件并没有引入注册这些组件。因此需要在 vite 构建工具里实现提前注入 import 语句
 
 ::: info PPS
-一开始我考虑的是在 `<Demo>`组件中，通过`props.path`得到组件名，然后利用 `defineAsyncComponent`、动态`import`、`<component />`组件 实现异步加载。但这种方式仅限于开发环境（即有本地服务器的情况下）。打包时由于是动态引入，`path`还没传入，相关组件均不会被打包，导致打包后 examples 下 的组件均不能展示。
+一开始我考虑的是在 `<Demo>`组件中，通过`props.path`得到组件名，然后利用 `defineAsyncComponent`、动态`import`、`<component />`组件 实现异步加载。但这种方式仅限于开发环境（即有本地服务器的情况下）。打包时由于是动态引入，`path`还没传入，相关组件均不会被打包，导致打包后 examples 下 的组件均不能展示
 :::
 
-Element Plus 实现了一个 MarkdownTransform 的 vite 插件：[docs/.vitepress/config/vite.ts - MarkdownTransform](https://github.com/element-plus/element-plus/blob/ba59b5d20eb486d50bac06f71d5c2b809ec0d942/docs/.vitepress/config/vite.ts#L111)，弊端是生成的`import`语句引入路径是写死的，这就要求文档和 examples 的路径一开始就约定好，不能变动。
+Element Plus 实现了一个 MarkdownTransform 的 vite 插件：[docs/.vitepress/config/vite.ts - MarkdownTransform](https://github.com/element-plus/element-plus/blob/ba59b5d20eb486d50bac06f71d5c2b809ec0d942/docs/.vitepress/config/vite.ts#L111)，弊端是生成的`import`语句引入路径是写死的，这就要求文档和 examples 的路径一开始就约定好，不能变动
 
-由于博客文档的路径多样，也为了适配更多项目。我将引入路径作为 frontmatter 配置项，并提供默认值。
+由于博客文档的路径多样，也为了适配更多项目。我将引入路径作为 frontmatter 配置项，并提供默认值
 
 完整实现如下：
 
 ::: info PPPS
-在插件的`transform`钩子中，一开始我没有去遍历页面同名文件夹下的文件而是通过正则从 markdown 内容中提取，这种方式无法区分 markdown 文件中注释的、示例的 demo 块。还是 Element Plus 的好点，直接引入该页面同名文件夹下的所有文件，倒逼你先去创建 Demo 文件。
+在插件的`transform`钩子中，一开始我没有去遍历页面同名文件夹下的文件而是通过正则从 markdown 内容中提取，这种方式无法区分 markdown 文件中注释的、示例的 demo 块。还是 Element Plus 的好点，直接引入该页面同名文件夹下的所有文件，倒逼你先去创建 Demo 文件
 :::
 
 ::: info PPPPS
-Element Plus 解析`:::demo`后的内容作为 description，我觉得有些浪费空间了。description 完全可以以 markdown 形式写在 demo 块前。而`:::demo`后的空间我作为`<Demo>`组件的额外传参用。比如：`:::demo [is-hidden-ops :is-show-source="false"]`
+Element Plus 解析`:::demo`后的内容作为 description，我觉得有些浪费空间了。description 完全可以以 markdown 形式写在 demo 块前。而`:::demo`后的空间我作为`<Demo>`组件的额外传参用。比如：`:::demo [is-hidden-ops is-show-raw-source-permanently]`
 :::
 
 ::: code-group
@@ -239,7 +268,7 @@ Element Plus 解析`:::demo`后的内容作为 description，我觉得有些浪�
 relativeExamples: ../../
 ---
 
-:::demo
+:::demo [is-show-raw-source-permanently is-hidden-ops]
 
 vue-repl-playground/test
 
@@ -335,11 +364,19 @@ export default function appendImportsToMarkdown(options = {}) {
 
 :::
 
-## 最终效果
+## 最终成果
 
-description....
+默认只展示效果，可以自行展开/收起代码
 
 ::: demo
+
+vue-repl-playground/test
+
+:::
+
+当想让代码和效果同时静态展示时，设置`is-show-raw-source-permanently`为`true`。此时还可以将`is-hidden-ops`设置成`true`不展示操作按钮让代码和效果更紧凑
+
+::: demo [is-show-raw-source-permanently is-hidden-ops]
 
 vue-repl-playground/test
 

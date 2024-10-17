@@ -15,7 +15,6 @@
   "license": "ISC",
   "devDependencies": {
     "@vueuse/core": "^11.1.0",
-    "element-plus": "^2.8.5",
     "less": "^4.2.0",
     "markdown-it-container": "^4.0.0",
     "vitepress": "^1.2.3"

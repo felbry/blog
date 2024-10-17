@@ -75,7 +75,10 @@ export default defineConfig({
             { text: '表相关', link: '/strapi/table' },
           ],
         },
-        { text: '使用@vue/repl 定制 Playground', link: '/vue-repl-playground' },
+        {
+          text: '参考 Element Plus Demo 和 Vue SFC Playground 自定义预览组件',
+          link: '/vue-repl-playground',
+        },
         { text: 'Node.js 常用 API', link: '/nodejs-api' },
         { text: 'CSP', link: '/csp' },
         { text: 'Master Go', link: '/mastergo/all' },
