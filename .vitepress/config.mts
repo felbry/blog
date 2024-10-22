@@ -53,6 +53,10 @@ export default defineConfig({
           ],
         },
         {
+          text: 'Docker',
+          items: [{ text: 'Docker 入门', link: '/docker/base' }],
+        },
+        {
           text: 'Material Design v3',
           items: [
             {
