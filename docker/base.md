@@ -1,5 +1,18 @@
 # Docker 入门
 
+## [编写 Dockerfile](https://docs.docker.com/get-started/docker-concepts/building-images/writing-a-dockerfile/)
+
+[指令参考](https://docs.docker.com/reference/dockerfile/)
+
+- `FROM <IMAGE_NAME>` 指定基础镜像，必须位于第一行，后面可以跟一个可选的镜像标签
+- `WORKDIR <PATH>` 设置工作目录。（我觉得可以理解为`cd`）
+- [`COPY <HOST_PATH> <IMAGE_PATH>` `COPY <src1> <src2> <src...> <dest>`](https://docs.docker.com/reference/dockerfile/#copy) 复制文件或目录到镜像，支持相对路径和绝对路径。
+- `RUN <COMMAND>` 运行一条命令
+- `ENV <NAME> <VALUE>` 设置环境变量（适用于正在运行的容器）
+- `EXPOSE <PORT>` 暴露端口，让外部可以访问
+- `USER <USER-OR-UID>` 为后续指令设置用户
+- `CMD ["<command>", "<arg1>"]` 设置基于此镜像的容器运行时自动执行的命令。示例：`CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080"]`
+
 ## 常用命令
 
 - `docker run <IMAGE_NAME>` 基于指定镜像创建运行一个容器
@@ -106,19 +119,6 @@ images、containers、networks、volumes、plugins 都可以叫 Docker objects
 
   [可选] 此时查看镜像 sample-app 的历史，就会看到刚追加进的 layer
 
-[编写 Dockerfile](https://docs.docker.com/get-started/docker-concepts/building-images/writing-a-dockerfile/)
-
-[指令参考](https://docs.docker.com/reference/dockerfile/)
-
-- `FROM <IMAGE_NAME>` 指定基础镜像，必须位于第一行，后面可以跟一个可选的镜像标签
-- `WORKDIR <PATH>` 设置工作目录。（我觉得可以理解为`cd`）
-- `COPY <HOST_PATH> <IMAGE_PATH>` 复制文件或目录到镜像，支持相对路径和绝对路径。
-- `RUN <COMMAND>` 运行一条命令
-- `ENV <NAME> <VALUE>` 设置环境变量（适用于正在运行的容器）
-- `EXPOSE <PORT>` 暴露端口，让外部可以访问
-- `USER <USER-OR-UID>` 为后续指令设置用户
-- `CMD ["<command>", "<arg1>"]` 设置基于此镜像的容器运行时自动执行的命令。示例：`CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080"]`
-
 ### containers 容器
 
 容器是镜像的可运行实例
@@ -145,7 +145,82 @@ images、containers、networks、volumes、plugins 都可以叫 Docker objects
 容器化环境提供了统一的开发环境，每个人无需安装 Node、MySQL 或其它依赖项。
 :::
 
-## 构建并推送第一个镜像
+## 构建镜像
+
+### 给镜像打 Tag
+
+完整的 tag 格式是：`[HOST[:PORT_NUMBER]/]PATH[:TAG]`
+
+`HOST`和`PORT_NUMBER`表示 register 地址，可以省略，默认是`docker.io`
+
+`PATH`由`[NAMESPACE/]REPOSITORY`组成，通常`NAMESPACE`就是自己 Docker 的用户名或组织名，如果不指定，默认是`library`(Docker 官方镜像命名空间)
+
+`TAG`随便自定义，默认是`latest`
+
+示例：
+
+- `nginx` 等于`docker.io/library/nginx:latest`
+- `docker/welcome-to-docker` 等于`docker.io/docker/welcome-to-docker:latest`
+- `ghcr.io/dockersamples/visualizer:pr-311` 这是一个完整 tag，每个部分都包含
+
+构建期间打 tag：`docker build -t my-username/my-image .`，**使用`-t`或`--tag`**
+
+构建后添加额外 tag：`docker image tag my-username/my-image another-username/another-image:v1`，**使用`docker image tag ..`**
+
+### 构建缓存
+
+要想合理利用缓存，要知道哪些情况会让缓存失效：
+
+- `RUN`指令的任何更改
+- `COPY`或`ADD`指令对应文件的任何更改（无论是内容还是权限更改）
+- 一层失效，后续（可能是依赖？）层也失效
+
+以以下 Dockerfile 为例
+
+```Dockerfile
+FROM node:20-alpine
+WORKDIR /app
+COPY . .
+RUN yarn install --production
+EXPOSE 3000
+CMD ["node", "./src/index.js"]
+```
+
+根据以上指令，只要每次源文件更改，`yarn install`都会重新执行，浪费时间
+
+更新后的 Dockerfile
+
+```Dockerfile
+FROM node:20-alpine
+WORKDIR /app
+COPY package.json yarn.lock ./
+RUN yarn install --production
+COPY . .
+EXPOSE 3000
+CMD ["node", "src/index.js"]
+```
+
+先复制依赖文件，执行依赖安装，再进行所有源文件拷贝。只要`package.json`和`yarn.lock`没变化，就不会重复依赖安装
+
+从构建日志中，通过`CACHED`关键字可以了解到哪些步骤缓存了
+
+```bash
+# 初次构建
+=> [1/5] FROM docker.io/library/node:21-alpine                                                    0.0s
+=> CACHED [2/5] WORKDIR /app                                                                      0.0s
+=> [3/5] COPY package.json yarn.lock ./                                                           0.2s
+=> [4/5] RUN yarn install --production                                                           14.0s
+=> [5/5] COPY . .
+
+# 二次构建（使用缓存）
+=> [1/5] FROM docker.io/library/node:21-alpine                                                    0.0s
+=> CACHED [2/5] WORKDIR /app                                                                      0.0s
+=> CACHED [3/5] COPY package.json yarn.lock ./                                                    0.0s
+=> CACHED [4/5] RUN yarn install --production                                                     0.0s
+=> [5/5] COPY . .
+```
+
+### 构建并推送第一个镜像
 
 先在[Docker Hub](https://hub.docker.com/)创建一个仓库，仓库名为 getting-started-todo-app
 
@@ -155,15 +230,67 @@ images、containers、networks、volumes、plugins 都可以叫 Docker objects
 
 最后推送到远程：`docker push <DOCKER_USERNAME>/getting-started-todo-app`
 
+### 多阶段构建
+
+如果不指定`--target`，Docker 默认构建最后一个阶段（即下面示例的`final`）为输出镜像
+
+因此可以在之前的阶段做构建，最后阶段仅包含运行时所需文件
+
+```Dockerfile
+FROM eclipse-temurin:21.0.2_13-jdk-jammy AS builder
+WORKDIR /opt/app
+COPY .mvn/ .mvn
+COPY mvnw pom.xml ./
+RUN ./mvnw dependency:go-offline
+COPY ./src ./src
+RUN ./mvnw clean install
+
+FROM eclipse-temurin:21.0.2_13-jre-jammy AS final
+WORKDIR /opt/app
+EXPOSE 8080
+COPY --from=builder /opt/app/target/*.jar /opt/app/*.jar
+ENTRYPOINT ["java", "-jar", "/opt/app/*.jar"]
+```
+
+要点：
+
+1. `AS` 给阶段命名，方便后续引用
+2. `COPY --from=builder` 从 builder 阶段拷贝文件
+
+## 运行容器
+
+### 发布和公开端口
+
+容器运行时，通过`docker run -d -p HOST_PORT:CONTAINER_PORT nginx`将主机端口与容器端口做映射
+
+比如`docker run -d -p 8080:80 nginx`，那访问主机`http://localhost:8080`就会转发到容器的`80`端口上
+
+如果主机的 8080 此时被占用 或 随便哪个主机端口都行，可以省略`HOST_PORT:`，即：`docker run -p 80 nginx`
+
+此时运行`docker ps`，就能看到实际映射的主机端口为`54772`
+
+```bash
+CONTAINER ID   IMAGE         COMMAND                  CREATED          STATUS          PORTS                    NAMES
+a527355c9c53   nginx         "/docker-entrypoint.â¦"   4 seconds ago    Up 3 seconds    0.0.0.0:54772->80/tcp    romantic_williamson
+```
+
+Dockerfile 中的`EXPOSE`指定应用程序运行将使用的（容器）端口。可以通过`-P`或`--publish-all`将所有指定(公开)端口发布到随机(临时)端口上。比如先`docker run -P nginx`，然后`docker ps`看看发布到了哪个端口上
+
 ## 问题
 
 1. `Error response from daemon: Get "https://registry-1.docker.io/v2/"`
 
-外网的 docker hub 访问不通，通过配置 daemon 代理访问。参考[daemon configuration file](https://docs.docker.com/reference/cli/dockerd/#daemon-configuration-file)、[http/https proxy](https://docs.docker.com/engine/daemon/proxy/#httphttps-proxy)
+外网的 docker hub 访问不通，通过配置 daemon 代理访问。
 
-mac 版配置如图：（参考[请问大佬， MacOS 下如何设置 docker 使用本地代理？ - v2ex](https://s.v2ex.com/t/1056546#r_14982082)）
+- 方式 1：（推荐）
 
-![image](https://felbry.github.io/picx-images-hosting/image.9rje8kv6hg.webp)
+  ![image](https://felbry.github.io/picx-images-hosting/image.3yeg55fyks.webp)
+
+- 方式 2：参考[daemon configuration file](https://docs.docker.com/reference/cli/dockerd/#daemon-configuration-file)、[http/https proxy](https://docs.docker.com/engine/daemon/proxy/#httphttps-proxy)
+
+  mac 版配置如图：（参考[请问大佬， MacOS 下如何设置 docker 使用本地代理？ - v2ex](https://s.v2ex.com/t/1056546#r_14982082)）
+
+  ![image](https://felbry.github.io/picx-images-hosting/image.9rje8kv6hg.webp)
 
 2. `ERROR [client internal] load metadata for docker.io/library/node:20`
 
@@ -184,4 +311,11 @@ mac 版配置如图：（参考[请问大佬， MacOS 下如何设置 docker 使
 failed to solve: DeadlineExceeded: DeadlineExceeded: DeadlineExceeded: node:20: failed to resolve source metadata for docker.io/library/node:20: failed to authorize: DeadlineExceeded: failed to fetch oauth token: Post "https://auth.docker.io/token": dial tcp 108.160.172.204:443: i/o timeout
 ```
 
-该问题尚未解决，后续学到更多知识再分析
+相关 issue：
+
+- [Docker Desktop proxy not being recognized when doing a build. #1979](https://github.com/docker/buildx/issues/1979)
+- [add system proxy config support for cli requests](https://github.com/docker/buildx/pull/1487)
+
+大概意思是 build 过程会在 CLI 中直接访问`*.docker.io`的资源，如果仅仅是 daemon 设置了代理，而终端没有设置代理，就请求不通
+
+临时解决方法就是在终端中设置 HTTP_PROXY 和 HTTPS_PROXY(不区分大小写)，设置完后再 build

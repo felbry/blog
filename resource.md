@@ -125,6 +125,7 @@ Canvas 引擎
 ### 代码生成
 
 - [v0](https://v0.dev/chat) Vercel 公司推出的一个创新性的 AI 驱动的用户界面设计和开发工具
+- [bolt](https://bolt.new/) StackBlitz 出品，交互挺新颖的
 
 ## 传输文件
 
