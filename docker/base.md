@@ -276,6 +276,80 @@ a527355c9c53   nginx         "/docker-entrypoint.â¦"   4 seconds ago    Up 3
 
 Dockerfile 中的`EXPOSE`指定应用程序运行将使用的（容器）端口。可以通过`-P`或`--publish-all`将所有指定(公开)端口发布到随机(临时)端口上。比如先`docker run -P nginx`，然后`docker ps`看看发布到了哪个端口上
 
+### 覆盖容器默认值
+
+通过`docker run`传参的形式覆盖默认值
+
+- 覆盖网络端口
+
+  `docker run -d -p HOST_PORT:CONTAINER_PORT postgres`
+
+- 设置环境变量
+
+  `docker run -e foo=bar postgres env`，在容器内设置一个 foo 的环境变量，其值为 bar
+
+  如果变量多，可以用`.env`文件，`docker run --env-file .env postgres env`
+
+- 限制容器消耗资源
+
+  使用`--memory`和`--cpus`，`docker run -e POSTGRES_PASSWORD=secret --memory="512m" --cpus="0.5" postgres`
+
+通过`compose.yaml`覆盖默认值
+
+- CMD 或 ENTRYPOINT
+
+```yaml
+services:
+  postgres:
+    image: postgres
+    entrypoint: ['docker-entrypoint.sh', 'postgres']
+    command: ['-h', 'localhost', '-p', '5432']
+```
+
+### 控制网络
+
+默认情况，所有容器运行时会自动连接到一个桥接网络，它允许同一主机上的容器相互通信，同时也与外界和其它主机隔离
+
+如果想某个容器与该主机上的其它容器网络隔离，可以自定义网络
+
+先创建个网络：`docker network create mynetwork`，查看所有网络：`docker network ls`，
+
+连接自定义网络：`docker run -d -e POSTGRES_PASSWORD=secret -p 5434:5432 --network mynetwork postgres`
+
+查看是否连接成功：`docker network inspect`
+
+默认网桥与自定义网络主要区别在**DNS 解析方式**：连接到默认网桥所有容器只能通过 IP 地址通信（除非用`--link`，但这个选项过时了）；自定义网络上的容器通过名称或别名解析。只有附加到自定义网络上的容器才能相互通信
+
+### 持久化容器数据 volume
+
+`docker run -d -p 80:80 -v log-data:/logs docker/welcome-to-docker`
+
+容器写入`/logs`的内容会持久存储在`log-data`（如果不存在，会自动创建）这个 volume 里
+
+删除容器，并使用该 volume 启动新容器，文件仍可用
+
+可将同一 volume 附加到多个容器以在它们之间共享文件（日志聚合、数据管道或其它事件驱动等场景）
+
+### 与容器共享本地文件
+
+主机与容器之间保存和共享文件有两种形式，一是 volume，二是 bind mounts
+
+如果想**持久存储**容器内生成或修改的数据（即使容器停止或删除），选择 volume。最典型的就是数据库
+
+如果想主机和容器之间**实时文件访问**，选择 bind mounts。比如配置文件，实时构建产物（热更新）
+
+与`-v`相比，`--mount`提供更高级功能和粒度控制
+
+`docker run --mount type=bind,source=/HOST/PATH,target=/CONTAINER/PATH,readonly nginx`
+
+`docker run --mount type=volume,src=/HOST/PATH,target=/CONTAINER/PATH nginx`
+
+`docker run -v HOST-DIRECTORY:/CONTAINER-DIRECTORY:rw nginx`，`:rw`是读写，`:ro`是只读，可以与`-v`和`--mount`一起使用
+
+仅与容器共享需要的目录。文件共享会带来开销，因为主机上文件的任何更改都需要通知 Linux VM。共享太多文件可能会导致 CPU 负载过高和文件系统性能下降
+
+对于缓存目录或数据库等非代码项，使用 data volume，性能会好得多
+
 ## 问题
 
 1. `Error response from daemon: Get "https://registry-1.docker.io/v2/"`
