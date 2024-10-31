@@ -54,7 +54,10 @@ export default defineConfig({
         },
         {
           text: 'Docker',
-          items: [{ text: 'Docker 入门', link: '/docker/base' }],
+          items: [
+            { text: 'Docker 入门', link: '/docker/base' },
+            { text: 'Docker 草稿', link: '/docker/temp' },
+          ],
         },
         {
           text: 'Material Design v3',
@@ -72,7 +75,7 @@ export default defineConfig({
         {
           text: 'Strapi v5',
           items: [
-            { text: '快速开始', link: '/strapi/quick-start' },
+            { text: 'Docker 一个工程', link: '/strapi/docker-start' },
             { text: '自定义接口', link: '/strapi/custom-api' },
             { text: '抛错', link: '/strapi/throw-error' },
             { text: 'strapi.xxx', link: '/strapi/strapi-api' },

@@ -15,6 +15,13 @@
 
 ## 常用命令
 
+本地保存 tar(上传)，远程加载
+
+- `docker save myapp:latest > myapp.tar`
+- `docker load < myapp.tar`
+
+其它
+
 - `docker run <IMAGE_NAME>` 基于指定镜像创建运行一个容器
 - `docker ps` 查看正在运行的容器。`-a` 包含停止的容器
 - `docker stop <the-container-id>` 停止运行容器。`the-container-id`可以截取部分，保证唯一性即可。比如`a1f7a4bb3a27`简写为`a1f`

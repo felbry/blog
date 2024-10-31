@@ -4,11 +4,11 @@ layout: home
 
 hero:
   name: "Felbry's Blog"
-  text: "个人博客"
+  text: '个人博客'
   actions:
     - theme: brand
-      text: Strapi 快速开始
-      link: /strapi/quick-start
+      text: 技术
+      link: /summary
 
 features:
   - title: Feature A
