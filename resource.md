@@ -4,7 +4,7 @@ sidebar: false
 
 # 资源整理
 
-## 前端组件(库)
+## 前端-组件/库/框架
 
 ### 纯 UI + JS
 
@@ -34,6 +34,12 @@ sidebar: false
 
 - [Style Dictionary](https://styledictionary.com/) 维护 Design Token
 
+## 数据库
+
+- [PDMan 数据库建模](https://pdman.cn)
+- [drawdb](https://drawdb.vercel.app/)
+- [dashpress](https://github.com/dashpresshq/dashpress) 自动分析数据库结构，生成管理后台
+
 ## 落地页资源
 
 - [meraki ui](https://merakiui.com/)
@@ -55,7 +61,6 @@ sidebar: false
 - [AIEmoji](https://ai-emoji.bettergogo.com/) 自然语言搜索 Emoji
 - [通过正则去掉 Emoji](https://taxodium.ink/post/emoji-regexp/) Emoji 正则匹配
 - [免费下载实时更新的 geoJSON 数据](https://github.com/TangSY/echarts-map-demo)
-- [lordicon](https://lordicon.com/) 部分免费的动态 SVG 图标
 - [cssfilter](https://www.cssfilters.co/) css filter 滤镜各种参数 可视化设置
 - [CSS Style Observer](https://github.com/bramus/style-observer) 监听 CSS 属性值的变化触发回调
 
@@ -84,6 +89,12 @@ Canvas 引擎
 
 - [FlutterFlow](https://flutterflow.io/) Build beautiful, modern apps incredibly fast
 - [heyform](https://github.com/heyform/heyform) 一个开源的表单生成器，创建调查、问卷、投票等，可以不编写一行代码
+- [grapesjs](https://grapesjs.com/) 开源，拖拉拽生成页面
+
+## HTTPS 证书
+
+- [Certimate](https://github.com/usual2970/certimate) 一个自搭建的开源平台，可以为自己的域名申请、部署、续期 SSL 证书
+- [Let’s Encrypt](https://letsencrypt.org/zh-cn/docs/client-options/)
 
 ## 开源系统（杂）
 
@@ -92,12 +103,11 @@ Canvas 引擎
 - [GammaRay](https://github.com/RGAA-Software/GammaRay) 不同设备之间推流
 - [Webp Server Go](https://github.com/webp-sh/webp_server_go) 代理图片，将图片转为 WebP/AVIF 格式，达到压缩图片体积的目的
 - [mcfly](https://github.com/cantino/mcfly) 快速查找 shell 历史纪录，定位到需要的命令（目前在 zsh 环境下没试成功）
-- [Certimate](https://github.com/usual2970/certimate) 一个自搭建的开源平台，可以为自己的域名申请、部署、续期 SSL 证书
 
 ### 服务器运维
 
-- ~[Coolify](https://coolify.io/) 开源且可自托管的 Heroku / Netlify / Vercel 替代品~ 2024/9/27 看了文档，好像有些简陋。看首页介绍的功能挺多的，文档上体现的较少，暂时放弃。
-- [1Panel](https://github.com/1Panel-dev/1Panel) Linux 服务器运维管理面板：应用商店/网站/数据库/容器/定时任务
+- ~~[Coolify](https://coolify.io/) 开源且可自托管的 Heroku / Netlify / Vercel 替代品~~ 2024/9/27 看了文档，好像有些简陋。看首页介绍的功能挺多的，文档上体现的较少，暂时放弃。
+- [1Panel](https://github.com/1Panel-dev/1Panel) Linux 服务器运维管理面板
 - [Kopia](https://github.com/kopia/kopia/) 备份/恢复工具，快照保存到云存储/服务器/本地计算机上，可以指定文件/目录。有命令行和图形化界面。
 
 ## GPT
@@ -177,10 +187,13 @@ Canvas 引擎
 ### SVG
 
 - [Making SVG Loading Spinners: An Interactive Guide](https://www.fffuel.co/svg-spinner/) 一步步实现 SVG 动画，交互式教程
+- [lordicon](https://lordicon.com/) 部分免费的动态 SVG 图标
+- [KanjiVG](https://kanjivg.tagaini.net/viewer.html) 汉字 SVG 资源
 
-### CSS
+### CSS/Typescript
 
 - [Modern CSS Solutions](https://moderncss.dev/) 现代 CSS 特性精讲
+- [TypeScript 教程 阮一峰](https://wangdoc.com/typescript/tsconfig.json) 最新的可以看 TS 官方文档
 
 ### Git
 
@@ -199,3 +212,16 @@ Canvas 引擎
 - [影梭 ZCShou/GoGoGo](https://github.com/ZCShou/GoGoGo) 用于 Android 8.0+ 的无需 ROOT 权限的虚拟定位 APP
 - [按键精灵](https://www.anjian.com/) 自动化工具
 - [Proxy302](https://www.proxy302.com/) 全球代理 IP 自助超市
+
+### 算法
+
+- [Hello 算法](https://www.hello-algo.com/) 动画图解、一键运行的数据结构与算法教程
+- [visualgo](https://visualgo.net/zh) 可视化算法过程
+
+### 设计模式
+
+- [设计模式目录](https://refactoringguru.cn/design-patterns/catalog)
+
+### 系统设计
+
+- [系统设计入门](https://github.com/donnemartin/system-design-primer) github 上的一个项目，整体介绍了一个 web 系统前后端所涉及的方方面面（可以作为系统架构师的入门材料了解）
