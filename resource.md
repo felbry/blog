@@ -34,12 +34,6 @@ sidebar: false
 
 - [Style Dictionary](https://styledictionary.com/) 维护 Design Token
 
-## 数据库
-
-- [PDMan 数据库建模](https://pdman.cn)
-- [drawdb](https://drawdb.vercel.app/)
-- [dashpress](https://github.com/dashpresshq/dashpress) 自动分析数据库结构，生成管理后台
-
 ## 落地页资源
 
 - [meraki ui](https://merakiui.com/)
@@ -50,11 +44,41 @@ sidebar: false
 - [现成模板 1 weijunext/landing-page-boilerplate](https://github.com/weijunext/landing-page-boilerplate)
 - [现成模板 2 huglemon/inwind-landing-page](https://github.com/huglemon/inwind-landing-page)
 
-## NodeJS
+## 低代码 LowCode
+
+- [FlutterFlow](https://flutterflow.io/) Build beautiful, modern apps incredibly fast
+- [heyform](https://github.com/heyform/heyform) 一个开源的表单生成器，创建调查、问卷、投票等，可以不编写一行代码
+- [grapesjs](https://grapesjs.com/) 开源，拖拉拽生成页面
+- [rxdrag](https://rxdrag.vercel.app/) 开源，可视化搭建页面
+
+## 软件工程
+
+### 数据库
+
+- [PDMan 数据库建模](https://pdman.cn)
+- [drawdb](https://drawdb.vercel.app/)
+- [dashpress](https://github.com/dashpresshq/dashpress) 自动分析数据库结构，生成管理后台
+
+### 算法
+
+- [Hello 算法](https://www.hello-algo.com/) 动画图解、一键运行的数据结构与算法教程
+- [visualgo](https://visualgo.net/zh) 可视化算法过程
+
+### 设计模式
+
+- [设计模式目录](https://refactoringguru.cn/design-patterns/catalog)
+
+### 系统设计/架构
+
+- [系统设计入门](https://github.com/donnemartin/system-design-primer) github 上的一个项目，整体介绍了一个 web 系统前后端所涉及的方方面面（可以作为系统架构师的入门材料了解）
+- [How Pinterest scaled to 11 million users with only 6 engineers](https://read.engineerscodex.com/p/how-pinterest-scaled-to-11-million)
+- [How Instagram scaled to 14 million users with only 3 engineers](https://read.engineerscodex.com/p/how-instagram-scaled-to-14-million)
+
+### NodeJS
 
 - [Jimp](https://jimp-dev.github.io/jimp/) 图片处理（各种操作图片的 API）
 
-## 前端相关
+### 前端
 
 - [WebTracing](https://m-cheng-web.github.io/web-tracing/) 前端监控
 - [blog cells](https://github.com/rameshvarun/blog-cells) 在网页中运行 js 交互代码，甚至是 python
@@ -67,6 +91,10 @@ sidebar: false
 - [前端领域的插件式设计](https://mp.weixin.qq.com/s/KdpLI0WBR_wyhGEbbqY6QQ)
 - [umami](https://github.com/umami-software/umami?tab=readme-ov-file) 替代 Google Analytics 的网站分析工具
 - [refline.js](https://github.com/refline/refline.js) 完全不依赖设计器环境的**参考线组件**
+
+Icon 图标
+
+- [tabler](https://tabler.io/icons) 5700+风格统一 Icon
 
 虚拟滚动
 
@@ -113,6 +141,7 @@ CSS
 
 - [如何用 Three.js + Blender 打造一个 web 3D 展览馆](https://mp.weixin.qq.com/s/VeCl4_HifslYU20cs4OeOg) 由浅到深，比较基础
 - [三维可视化项目快速落地的开源框架](https://github.com/hawk86104/icegl-three-vue-tres)
+- [galacean](https://galacean.antgroup.com/) 移动优先的 Web 3D 引擎
 
 SVG
 
@@ -143,13 +172,23 @@ SVG
 
 Canvas 引擎
 
+- [leaferjs](https://www.leaferjs.com/)
 - [Newcar](https://newcar.js.org/zh/) 一个 JS 语言的前端动画引擎，基于 Skia 的 WebAssembly 版本，在 Canvas 画布上生成动画
 
-## 低代码 LowCode
+### 编译器
 
-- [FlutterFlow](https://flutterflow.io/) Build beautiful, modern apps incredibly fast
-- [heyform](https://github.com/heyform/heyform) 一个开源的表单生成器，创建调查、问卷、投票等，可以不编写一行代码
-- [grapesjs](https://grapesjs.com/) 开源，拖拉拽生成页面
+- [Create Your Own Compiler](https://citw.dev/tutorial/create-your-own-compiler) 交互式教程
+
+### 网络(内网)相关
+
+- [frp](https://github.com/fatedier/frp/blob/dev/README_zh.md)
+- [frpc desktop](https://github.com/luckjiawei/frpc-desktop)
+- [Localtunnel](https://theboroer.github.io/localtunnel-www/) npm 包，一行命令暴漏出去
+
+### Git
+
+- [inside .git](https://jvns.ca/blog/2024/01/26/inside-git/) .git 目录中文件详解
+- [自己动手写 Git](https://wyag-zh.hanyujie.xyz/)
 
 ## 设计资源/平台
 
@@ -172,7 +211,11 @@ Canvas 引擎
 - [excalidraw](https://excalidraw.com/) 白板绘画
 - [liumengniu/majiang](https://github.com/liumengniu/majiang) 麻将系统
 
-### 服务器运维
+聊天系统
+
+- [VoceChat](https://voce.chat) IM 软件
+
+服务器运维
 
 - ~~[Coolify](https://coolify.io/) 开源且可自托管的 Heroku / Netlify / Vercel 替代品~~ 2024/9/27 看了文档，好像有些简陋。看首页介绍的功能挺多的，文档上体现的较少，暂时放弃。
 - [1Panel](https://github.com/1Panel-dev/1Panel) Linux 服务器运维管理面板
@@ -255,17 +298,6 @@ Canvas 引擎
 - [Earthworm](https://earthworm.cuixueshe.com/) 连词造句学英语
 - [DashPlayer](https://dash-player.solidspoon.xyz/) 英语学习播放器，直接将视频中的语音转成文本句子
 
-## 网络(内网)相关
-
-- [frp](https://github.com/fatedier/frp/blob/dev/README_zh.md)
-- [frpc desktop](https://github.com/luckjiawei/frpc-desktop)
-- [Localtunnel](https://theboroer.github.io/localtunnel-www/) npm 包，一行命令暴漏出去
-
-## Git
-
-- [inside .git](https://jvns.ca/blog/2024/01/26/inside-git/) .git 目录中文件详解
-- [自己动手写 Git](https://wyag-zh.hanyujie.xyz/)
-
 ## 软考
 
 - [软考高级架构师备考记录](https://nekonull.me/posts/ruankao-architect/)
@@ -275,21 +307,6 @@ Canvas 引擎
 - [影梭 ZCShou/GoGoGo](https://github.com/ZCShou/GoGoGo) 用于 Android 8.0+ 的无需 ROOT 权限的虚拟定位 APP
 - [按键精灵](https://www.anjian.com/) 自动化工具
 - [Proxy302](https://www.proxy302.com/) 全球代理 IP 自助超市
-
-## 算法
-
-- [Hello 算法](https://www.hello-algo.com/) 动画图解、一键运行的数据结构与算法教程
-- [visualgo](https://visualgo.net/zh) 可视化算法过程
-
-## 设计模式
-
-- [设计模式目录](https://refactoringguru.cn/design-patterns/catalog)
-
-## 系统设计/架构
-
-- [系统设计入门](https://github.com/donnemartin/system-design-primer) github 上的一个项目，整体介绍了一个 web 系统前后端所涉及的方方面面（可以作为系统架构师的入门材料了解）
-- [How Pinterest scaled to 11 million users with only 6 engineers](https://read.engineerscodex.com/p/how-pinterest-scaled-to-11-million)
-- [How Instagram scaled to 14 million users with only 3 engineers](https://read.engineerscodex.com/p/how-instagram-scaled-to-14-million)
 
 ## PPT
 
@@ -317,6 +334,7 @@ Canvas 引擎
 - [puzzle](https://jrmf.org/puzzle/) 各种数学小游戏，锻炼思维
 - [折纸教程](https://origami.kosmulski.org/blog/2022-10-23-fujimoto-books-public-domain)
 - [edclub 习字丛林](https://www.typingclub.com/da-zi) 在线打字课程
+- [scratch](https://scratch.mit.edu/) 学习编程
 
 字帖
 
@@ -353,3 +371,7 @@ Canvas 引擎
 ## 优秀独立个人站
 
 - [Moonvy 月球背面](https://moonvy.com/blog/)
+
+## 其它
+
+- [Web 版 红白机](https://www.webrcade.com/) 网页上玩小时候的游戏
