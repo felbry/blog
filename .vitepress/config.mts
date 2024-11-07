@@ -46,6 +46,13 @@ export default defineConfig({
           items: [{ text: 'Git使用规范', link: '/team-management/git' }],
         },
         {
+          text: '1panel',
+          items: [
+            { text: '使用 1panel 申请/续签 HTTPS 证书', link: '/1panel/https' },
+            { text: '使用 1panel 创建 HTTPS 服务', link: '/1panel/reverse-proxy' },
+          ],
+        },
+        {
           text: 'SVG',
           items: [
             { text: 'SVG基础', link: '/svg/base' },
@@ -56,6 +63,7 @@ export default defineConfig({
           text: 'Docker',
           items: [
             { text: 'Docker 入门', link: '/docker/base' },
+            { text: 'Docker 配置私有仓库', link: '/docker/private-registry' },
             { text: 'Docker 草稿', link: '/docker/temp' },
           ],
         },

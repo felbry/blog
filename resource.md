@@ -169,6 +169,7 @@ SVG
 - [Animista](https://animista.net/) 预览常见动画效果，可快速复制 CSS 代码（比较全）
 - [animastore](http://guowc.github.io/animastore/) 预览常见动画效果，可快速复制 CSS 代码（中文的，效果没上一个全，也不能调参数）
 - [Framer Motion](https://www.framer.com/motion/) React 动画库
+- [gsap](https://gsap.com/pricing/)
 
 Canvas 引擎
 
@@ -206,10 +207,11 @@ Canvas 引擎
 - [xiaoju survey 问卷系统](https://github.com/didi/xiaoju-survey)
 - [Stirling-PDF](https://stirlingtools.com/)
 - [GammaRay](https://github.com/RGAA-Software/GammaRay) 不同设备之间推流
-- [Webp Server Go](https://github.com/webp-sh/webp_server_go) 代理图片，将图片转为 WebP/AVIF 格式，达到压缩图片体积的目的
+- [Webp Server Go](https://github.com/webp-sh/webp_server_go) 代理图片地址，将图片转为 WebP/AVIF 格式，达到压缩图片体积的目的
 - [mcfly](https://github.com/cantino/mcfly) 快速查找 shell 历史纪录，定位到需要的命令（目前在 zsh 环境下没试成功）
 - [excalidraw](https://excalidraw.com/) 白板绘画
 - [liumengniu/majiang](https://github.com/liumengniu/majiang) 麻将系统
+- [zyronon/douyin](https://github.com/zyronon/douyin) 仿抖音短视频项目
 
 聊天系统
 
