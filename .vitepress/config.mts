@@ -64,7 +64,7 @@ export default defineConfig({
           items: [
             { text: 'Docker 入门', link: '/docker/base' },
             { text: 'Docker 配置私有仓库', link: '/docker/private-registry' },
-            { text: 'Docker 草稿', link: '/docker/temp' },
+            { text: 'Docker 快速参考', link: '/docker/ref' },
           ],
         },
         {

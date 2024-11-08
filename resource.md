@@ -366,9 +366,10 @@ Canvas 引擎
 - [Bark](https://github.com/Finb/Bark?tab=readme-ov-file) iOS App 推送
 - [ntfy](https://ntfy.sh/)
 
-## 金融投资
+## 金融投资（股票/基金）
 
 - [策引](https://www.myinvestpilot.com/portfolios)
+- [OpenBB](https://github.com/OpenBB-finance/OpenBB)
 
 ## 优秀独立个人站
 

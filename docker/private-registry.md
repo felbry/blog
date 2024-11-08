@@ -96,7 +96,7 @@ docker run \
 
 生成一个`auth`文件夹，其下有个`htpasswd`文件，文件中有一个：用户名：testuser、密码：testpassword 的账号
 
-这里不用`docker run`运行，而是编排的形式。因此参考[Deploy your registry using a Compose file](https://distribution.github.io/distribution/about/deploying/#deploy-your-registry-using-a-compose-file)，对 compose 文件增加如下内容：
+这里不用`docker run`运行，而是编排的形式。因此参考[Deploy your registry using a Compose file](https://distribution.github.io/distribution/about/deploying/#deploy-your-registry-using-a-compose-file)，对 registry 的 compose 文件增加如下内容：
 
 ```yaml
 environment: # [!code ++]
@@ -111,7 +111,19 @@ volumes:
 
 重启 compose，此时访问`https://<domain-name>/v2/_catalog`就需要输入账号密码了
 
-如果尝试推送`docker push <domain-name>/<image-name>`，就会报`no basic auth credentials`的错误
+### 5.3 试试推送和拉取
+
+直接运行`docker push <domain-name>/<image-name>`，会报`no basic auth credentials`的错误，此时只需要执行`docker login <domain-name>`，输入用户名、密码，即可登录成功。之后就能正常推送了
+
+> 如果该 registry 服务是通过 openresty 或 nginx 代理的，推送的镜像某个 layer 过大会报：`413 Request Entity Too Large`的错误，此时需要在 openresty 或 nginx 的配置文件中增加一行：
+
+```nginx
+server {
+  client_max_body_size 1024M; # [!code ++]
+}
+```
+
+对于服务器内部想要拉取镜像，先通过`docker login 127.0.0.1:<port>`登录，或是直接在 1panel -> 容器 -> 仓库 来配置用户名、密码
 
 ### PS：不建议自签名证书方案
 
@@ -130,7 +142,7 @@ volumes:
 
 一种是全量覆盖配置
 
-文档里都有详尽说明
+文档里都有详尽说明该如何配置
 
 ## 其它
 
