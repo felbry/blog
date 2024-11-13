@@ -19,6 +19,7 @@ sidebar: false
 ### Vue
 
 - [PrimeVue](https://primevue.org/)
+- [Quasar](https://quasar.dev/start/quick-start)
 
 ### Web Compnent
 

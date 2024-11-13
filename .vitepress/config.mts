@@ -84,7 +84,8 @@ export default defineConfig({
           text: 'Strapi v5',
           items: [
             { text: 'Docker 一个工程', link: '/strapi/docker-start' },
-            { text: '自定义接口', link: '/strapi/custom-api' },
+            { text: '快速设置', link: '/strapi/pre-setting' },
+            { text: '创建/自定义接口', link: '/strapi/custom-api' },
             { text: '抛错', link: '/strapi/throw-error' },
             { text: 'strapi.xxx', link: '/strapi/strapi-api' },
             { text: '表相关', link: '/strapi/table' },
