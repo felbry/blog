@@ -70,8 +70,11 @@ autoload -U add-zsh-hook
 
 # 定义函数load-nvmrc
 load-nvmrc() {
-  # -f 检测文件是否存在且是一个普通文件
-  # 如果有 执行nvm use
+  # 检查 package.json 文件是否存在
+  if [ ! -f package.json ]; then
+    return
+  fi
+  # 如果有 .nvmrc 文件 执行nvm use
   if [ -f .nvmrc ]; then
     nvm use
   # 如果没有 .nvmrc 文件，自动切换为default版本
