@@ -92,6 +92,10 @@ export default defineConfig({
           ],
         },
         {
+          text: 'uni-app',
+          items: [{ text: 'uni-app 使用 webview 自定义返回逻辑', link: '/uni-app/webview-back' }],
+        },
+        {
           text: '参考 Element Plus Demo 和 Vue SFC Playground 自定义预览组件',
           link: '/vue-repl-playground',
         },
