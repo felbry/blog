@@ -34,7 +34,7 @@
 
 可以通过重写父 web-view 的默认返回行为：获取到子 web-view 对象，执行子 web-view 的返回动作。uni-app 提供了`onBackPress`声明周期函数来实现，详见[方案一：onBackPress（仅适用 Android）](#方案一-onbackpress-仅适用-android)
 
-## 方案一：onBackPress（仅适用 Android）
+## 方案一：onBackPress
 
 阅读[教程 - 页面 - onBackPress](https://uniapp.dcloud.net.cn/tutorial/page.html#onbackpress)、[uni-app 自定义返回逻辑教程](https://ask.dcloud.net.cn/article/35120)，提取到以下信息：
 
@@ -42,7 +42,7 @@
 - iOS 端**侧滑返回**不会触发`onBackPress`
 - 以下三种场景会触发`onBackPress`：
   1. Android 实体返回键/侧滑（`event.from = 'backbutton'`）
-  2. 顶部导航栏左边的返回按钮（`event.from = 'backbutton'`）
+  2. 顶部导航栏左边的返回按钮（安卓和 iOS 均可）（`event.from = 'backbutton'`）
   3. uni-app 的返回 API，即`uni.navigateBack()`（`event.from = 'navigateBack'`）
 - 它是页面级生命周期函数，非组件级
 
@@ -76,3 +76,28 @@ export default {
 - 有了子 web-view 对象，利用[WebviewObject API](https://www.html5plus.org/doc/zh_cn/webview.html#plus.webview.WebviewObject)实现返回，本例使用了`canBack()`和`back()`方法
 
 ## 方案二：plus.key.addEventListener('backbutton', () => {})
+
+效果和方案一的`onBackPress`一致，参考[key->addEventListener](https://www.html5plus.org/doc/zh_cn/key.html#plus.key.addEventListener)的一句话：
+
+> 应用中存在多个 Webview 窗口时，按照窗口的显示栈顺序从后往前查找，查找到添加按键事件监听器的窗口后停止（中断前面 Webview 窗口对按键事件的监听），并向窗口触发执行按键回调事件
+
+可以得知：如果是在 H5 的子 web-view 中进行`plus.key.addEventListener('backbutton', () => {})`事件监听，那么就永远不会触发父 web-view 中的`onBackPress`了。即：方案一和方案二是互斥的
+
+## 方案一和方案二小结
+
+方案一在 uni-app 页面端实现，方案二则侧重在 H5 端实现，可以根据场景来决定使用哪种。两者都偏向安卓端，不可混用。
+
+比如你的 H5 还可能定向到第三方系统，而这三方系统并没有引入`uni.webview.js`，此时可以采用方案一；如果自定义返回逻辑还可能访问 H5 的`router`等变量，那方案二也许更合适
+
+## 关于 iOS
+
+在 uni-app 端，有一个[app-plus->popGesture](https://uniapp.dcloud.net.cn/collocation/pages.html#app-plus)配置项，默认值是`close`，即启用侧滑返回。也就是说如果是 uni-app 页面之间的跳转，默认在 iOS 端就能侧滑返回
+
+但目前没有检索到 uni-app 针对 iOS 侧滑返回的监听方法，因此自定义返回逻辑不是很方便
+
+网上的一些思路：
+
+- 通过其它生命周期函数监听滑动事件，判断是否符合侧滑特征
+- 通过写原生 iOS 插件，将侧滑事件传递给 uni-app 页面
+
+后期有需求再进一步研究
