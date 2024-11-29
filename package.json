@@ -14,6 +14,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@mdit/plugin-footnote": "^0.13.1",
     "@vueuse/core": "^11.1.0",
     "less": "^4.2.0",
     "markdown-it-container": "^4.0.0",

@@ -3,6 +3,7 @@ import path from 'path'
 import mdContainer from 'markdown-it-container'
 import createDemoContainer from './plugins/markdown/demo.js'
 import appendDemoImportsToMd from './plugins/vite/append-imports-to-markdown.js'
+import { footnote } from '@mdit/plugin-footnote'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -24,6 +25,14 @@ export default defineConfig({
       // "/team-management": [{ text: "Git", link: "/team-management/git" }],
       '/': [
         { text: '简介', link: '/summary' },
+        {
+          text: '微信小程序',
+          items: [
+            { text: '原生 VS Taro', link: '/miniprogram/native-vs-taro' },
+            { text: '微信小程序开发手册', link: '/miniprogram/dev-handbook' },
+            { text: 'Taro', link: '/miniprogram/taro' },
+          ],
+        },
         {
           text: '构建工具',
           items: [{ text: 'Vite 和 Rollup 插件开发', link: '/build-tools/vite-and-rollup-plugin' }],
@@ -102,7 +111,6 @@ export default defineConfig({
         { text: 'Node.js 常用 API', link: '/nodejs-api' },
         { text: 'CSP', link: '/csp' },
         { text: 'Master Go', link: '/mastergo/all' },
-        { text: 'Taro', link: '/taro' },
       ],
     },
     lastUpdated: true,
@@ -112,7 +120,7 @@ export default defineConfig({
     socialLinks: [{ icon: 'github', link: 'https://github.com/felbry' }],
   },
   markdown: {
-    config: (md) => md.use(mdContainer, 'demo', createDemoContainer(md)),
+    config: (md) => md.use(mdContainer, 'demo', createDemoContainer(md)).use(footnote),
   },
   vite: {
     server: {

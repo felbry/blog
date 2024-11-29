@@ -59,6 +59,7 @@ sidebar: false
 - [PDMan 数据库建模](https://pdman.cn)
 - [drawdb](https://drawdb.vercel.app/)
 - [dashpress](https://github.com/dashpresshq/dashpress) 自动分析数据库结构，生成管理后台
+- [PG Back Web](https://github.com/eduardolat/pgbackweb) 带有 Web 界面的 PostgreSQL 备份工具
 
 ### 算法
 
@@ -214,9 +215,14 @@ Canvas 引擎
 - [liumengniu/majiang](https://github.com/liumengniu/majiang) 麻将系统
 - [zyronon/douyin](https://github.com/zyronon/douyin) 仿抖音短视频项目
 
+后台管理
+
+- [1024-lab/smart-admin](https://github.com/1024-lab/smart-admin)
+
 聊天系统
 
 - [VoceChat](https://voce.chat) IM 软件
+- [悟空 IM](https://github.com/WuKongIM/WuKongIM) 悟空 IM
 
 服务器运维
 
@@ -331,6 +337,7 @@ Canvas 引擎
 ## 学生/宝宝相关
 
 - [aspoem](https://aspoem.com/zh-Hans) 现代化中国诗词学习网站
+- [poetrystrands](https://poetrystrands.com/zh) 古诗词连字游戏
 - [全历史](https://www.allhistory.com/)
 - [中国历朝代视频讲解](https://www.historyline.online/)
 - [重现化学](https://www.envisioningchemistry.cn/)
@@ -371,6 +378,7 @@ Canvas 引擎
 
 - [策引](https://www.myinvestpilot.com/portfolios)
 - [OpenBB](https://github.com/OpenBB-finance/OpenBB)
+- [期货和期权市场知识 - 芝商所](https://www.cmegroup.com/cn-s/education/courses.html#filters=getting-started) 直连不一定访问通
 
 ## 优秀独立个人站
 

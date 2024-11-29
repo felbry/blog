@@ -272,7 +272,7 @@ relativeExamples: ../../
 
 vue-repl-playground/test
 
-\::: <!-- 前面加个斜线，是因为避免 :::code-group 的解析错误 -->
+::: <!-- 占位内容，避免markdown解析问题 -->
 ```
 
 ```js [./vitepress/config.js]
