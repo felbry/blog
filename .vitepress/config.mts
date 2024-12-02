@@ -30,6 +30,7 @@ export default defineConfig({
           items: [
             { text: '原生 VS Taro', link: '/miniprogram/native-vs-taro' },
             { text: '微信小程序开发手册', link: '/miniprogram/dev-handbook' },
+            { text: 'skyline 下的问题', link: '/miniprogram/skyline-problem' },
             { text: 'Taro', link: '/miniprogram/taro' },
           ],
         },

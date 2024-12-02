@@ -116,7 +116,43 @@ Component({
 </view>
 ```
 
-## 全屏页面
+## 组件
+
+### scroll-view
+
+`type="custom" height="固定值"`，这俩直接设置，避免各种问题。（如果`scroll-x`时不设置`type="custom"`显示就会有问题；在低版本 skyline 中不设置`height`，内部元素无法撑开）
+
+skyline 下，`scroll-view`就是 flex 容器。`scroll-x`就是`flex-direction: row`，`scroll-y`就是`flex-direction: col`。其下的直接子元素自动填充其**交叉轴**高度。
+
+```html
+<scroll-view
+  scroll-x
+  type="custom"
+  class="h-100"
+>
+  <view class="w-50 bg-red-200"></view>
+  <view class="w-50 bg-green-200"></view>
+</scroll-view>
+```
+
+![image](https://felbry.github.io/picx-images-hosting/image.lvrsqhhtd.webp)
+
+```html
+<scroll-view
+  scroll-y
+  type="custom"
+  class="h-200"
+>
+  <view class="h-50 bg-red-200"></view>
+  <view class="h-50 bg-green-200"></view>
+</scroll-view>
+```
+
+![image](https://felbry.github.io/picx-images-hosting/image.4g4jbp73ho.webp)
+
+如果需要设置`gap`，参见[skyline 下的 flex 相关问题](./skyline-problem#flex-相关问题)
+
+## 全屏页面顶部数据获取
 
 通过[页面配置](https://developers.weixin.qq.com/miniprogram/dev/reference/configuration/page.html)设置`navigationStyle`为`custom`
 
