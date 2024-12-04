@@ -24,6 +24,12 @@
 
   因此`hover:bg-red-500`替代为`hover__bg-red-500`
 
+### 基础颜色设置
+
+`app.json`中的`backgroundColor`设置的是页面下拉显示的背景色而不是页面背景色
+
+要设置页面背景色，在全局 wxss 文件中以`page`选择器设置
+
 ### 页面路径配置和跳转
 
 **配置**
@@ -66,12 +72,24 @@ Component({
     msg: 'hello',
   },
 
-  // 组件生命周期
-  created() {}, // 在组件实例刚刚被创建时执行，注意此时不能调用 setData
-  attached() {}, // 在组件实例进入页面节点树时执行
-  ready() {}, // 在组件布局完成后执行
-  moved() {}, // 在组件实例被移动到节点树另一个位置时执行
-  detached() {}, // 在组件实例被从页面节点树移除时执行
+  // 组件生命周期 - 一共6个 - 也可以写在顶层兼容低版本，但不推荐
+  lifetimes: {
+    created() {}, // 在组件实例刚刚被创建时执行，注意此时不能调用 setData
+    attached() {}, // 在组件实例进入页面节点树时执行
+    ready() {}, // 在组件布局完成后执行
+    moved() {}, // 在组件实例被移动到节点树另一个位置时执行
+    detached() {}, // 在组件实例被从页面节点树移除时执行
+    error(err) {}, // 每当组件方法抛出错误时执行
+  },
+
+  // 组件所在页面生命周期 - 一共4个
+  // 自定义tabbar组件并不会触发页面的生命周期
+  pageLifetimes: {
+    show() {}, // 组件所在的页面被展示时执行
+    hide() {}, // 组件所在的页面被隐藏时执行
+    resize(sizeObj) {}, // 组件所在的页面尺寸变化时执行
+    routeDone() {}, // 组件所在页面路由动画完成时执行
+  }
 
   // 纯数据字段，就是不加监听器，可以通过this.setData修改，但感觉没必要，可以直接this.data.xxx = xxx
   options: {
@@ -115,6 +133,40 @@ Component({
   {{ index }}: {{ item.message }}
 </view>
 ```
+
+### [npm 支持](https://developers.weixin.qq.com/miniprogram/dev/devtools/npm.html)
+
+官方的文档说的有些复杂，一些实际场景操作起来很快
+
+- 安装某个组件库
+
+  `npm i xxx -S --production`，然后工具 -> 构建 npm，即可在项目根目录下生成一个`miniprogram_npm`的文件夹，其下是`dependencies`的包
+
+  比如安装了`tdesign-miniprogram`，构建完之后使用`button`组件，就可以写为（不用加`miniprogram_npm`）：
+
+  ```json
+  {
+    "usingComponents": {
+      "t-button": "tdesign-miniprogram/button/button"
+    }
+  }
+  ```
+
+### 使用插件
+
+大部分插件都需要在 后台（左下角头像） -> 账号设置 -> 第三方设置 的插件管理中先搜索、申请、添加
+
+但是像“腾讯位置服务地图选点”这个，就搜不到
+
+可以通过**微信服务市场**直接添加，https://fuwu.weixin.qq.com/service/detail/000c2a50a58c206b3d1957a2d5b015
+
+同理，其它插件也可以通过此形式试试
+
+- 腾讯的地图选点插件的坑
+
+  腾讯的地图选点插件需要腾讯地图的 key，核心功能依赖[地点搜索](https://lbs.qq.com/faq/serverFaq/webServiceSpaceSearch)，个人开发者实际额度[每日 PV200](https://lbs.qq.com/dev/console/quotaImprove)，查一下就没了，不把个人开发者当人。而[高德免费额度](https://lbs.amap.com/upgrade#price)更是调整到了 100，个人开发者 g 了
+
+  ![image](https://felbry.github.io/picx-images-hosting/image.9rjfz7j0dg.webp)
 
 ## 组件
 
