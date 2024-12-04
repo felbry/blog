@@ -202,7 +202,7 @@ skyline 下，`scroll-view`就是 flex 容器。`scroll-x`就是`flex-direction:
 
 ![image](https://felbry.github.io/picx-images-hosting/image.4g4jbp73ho.webp)
 
-如果需要设置`gap`，参见[skyline 下的 flex 相关问题](./skyline-problem#flex-相关问题)
+如果需要设置`gap`，参见[skyline 下的 flex 相关问题](./dev-problem#flex-相关问题)
 
 ## 全屏页面顶部数据获取
 
