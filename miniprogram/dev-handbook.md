@@ -50,15 +50,21 @@
 
 建议统一为绝对路径，以上述为例，假如你要跳转`index`页面，`wx.switchTab({ url: 'pages/index/index' })`是错误的，因为没有`/`开头代表的是相对路径
 
-### 开发页面
+### [开发页面](https://developers.weixin.qq.com/miniprogram/dev/reference/api/Page.html)
 
-页面/组件统一用 Component 构建，页面生命周期函数放在`methods`中 [^1]
+页面/组件统一用`Component`构建，页面相关函数放在`methods`中 [^1]
 
 此时页面 json 文件要包含`usingComponents`定义，可以为`{}` [^2]（如果不定义这个字段，会使得页面的 this 对象的原型稍有差异 [^3]）
 
+<hr />
+
 `Component`的`properties`可用来接收页面传参，如`/pages/index/index?paramA=123&paramB=xyz`，`paramA`和`paramB`可通过`properties`获取到 [^2]
 
-[页面生命周期](https://developers.weixin.qq.com/miniprogram/dev/framework/app-service/page-life-cycle.html)：`onLoad` -> `onShow` -> `onReady`，之后可能触发`onHide`、`onUnload`
+访问形式就是：`this.data.paramA`（`properties`和`data`字段都是通过`this.data.`访问）；如果在组件生命周期中访问值，最好是在`attached`及之后的钩子里访问，测试了一个`created`还访问不到传的值
+
+<hr />
+
+[页面生命周期](https://developers.weixin.qq.com/miniprogram/dev/framework/app-service/page-life-cycle.html)：`onLoad` -> `onShow` -> `onReady`，之后可能触发`onHide`、`onUnload`。除了这些，还有许多如`onPullDownRefresh`这样的页面事件函数
 
 ### [开发组件](https://developers.weixin.qq.com/miniprogram/dev/reference/api/Component.html)
 
@@ -82,7 +88,7 @@ Component({
     error(err) {}, // 每当组件方法抛出错误时执行
   },
 
-  // 组件所在页面生命周期 - 一共4个
+  // 组件所在页面生命周期 - 一共4个 - 如果你的页面是通过Component构造的，可以在methods中添加页面生命周期而不是pageLifetimes
   // 自定义tabbar组件并不会触发页面的生命周期
   pageLifetimes: {
     show() {}, // 组件所在的页面被展示时执行
@@ -167,6 +173,15 @@ Component({
   腾讯的地图选点插件需要腾讯地图的 key，核心功能依赖[地点搜索](https://lbs.qq.com/faq/serverFaq/webServiceSpaceSearch)，个人开发者实际额度[每日 PV200](https://lbs.qq.com/dev/console/quotaImprove)，查一下就没了，不把个人开发者当人。而[高德免费额度](https://lbs.amap.com/upgrade#price)更是调整到了 100，个人开发者 g 了
 
   ![image](https://felbry.github.io/picx-images-hosting/image.9rjfz7j0dg.webp)
+
+### [setData](https://developers.weixin.qq.com/miniprogram/dev/framework/performance/tips/runtime_setData.html#_3-4-setData-%E5%BA%94%E5%8F%AA%E4%BC%A0%E5%8F%91%E7%94%9F%E5%8F%98%E5%8C%96%E7%9A%84%E6%95%B0%E6%8D%AE)
+
+```js
+this.setData({
+  'array[2].message': 'newVal',
+  'a.b.c.d': 'newVal',
+})
+```
 
 ## 组件
 

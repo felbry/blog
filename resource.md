@@ -14,17 +14,21 @@ sidebar: false
 
 - [Mantine](https://mantine.dev/)
 - [HorizonUI](https://horizon-ui.com/)
+- [NextUI](https://nextui.org/)
 - [Magic UI](https://magicui.design/) 特点是每个组件都有精心设计的动画
 
 ### Vue
 
 - [PrimeVue](https://primevue.org/)
 - [Quasar](https://quasar.dev/start/quick-start)
+- [VARLET](https://varletjs.org/#/zh-CN/index)
+- [Surely Vue](https://www.surely.cool/doc/guide#%E7%AE%80%E4%BB%8B) Vue3 高级组件（树、表格）
 
 ### Web Compnent
 
 - [mdui](https://www.mdui.org/zh-cn/)
 - [shoelace](https://shoelace.style/)
+- [Quark Design](https://quark-ecosystem.github.io/quarkd-docs/) 哈啰团队出品
 - [mumuy/widget-qrcode](https://github.com/mumuy/widget-qrcode) 二维码组件
 
 ### [Alpine.js](https://alpinejs.dev/)
@@ -79,6 +83,7 @@ sidebar: false
 ### NodeJS
 
 - [Jimp](https://jimp-dev.github.io/jimp/) 图片处理（各种操作图片的 API）
+- [Fuse.js](https://www.fusejs.io/) 模糊搜索
 
 ### 前端
 
@@ -86,13 +91,20 @@ sidebar: false
 - [blog cells](https://github.com/rameshvarun/blog-cells) 在网页中运行 js 交互代码，甚至是 python
 - [AIEmoji](https://ai-emoji.bettergogo.com/) 自然语言搜索 Emoji
 - [通过正则去掉 Emoji](https://taxodium.ink/post/emoji-regexp/) Emoji 正则匹配
-- [免费下载实时更新的 geoJSON 数据](https://github.com/TangSY/echarts-map-demo)
+- [免费下载实时更新的 geoJSON 数据](https://github.com/TangSY/echarts-map-demo) 地图数据
 - [cssfilter](https://www.cssfilters.co/) css filter 滤镜各种参数 可视化设置
 - [CSS Style Observer](https://github.com/bramus/style-observer) 监听 CSS 属性值的变化触发回调
 - [Web 终极拦截技巧（全是骚操作）](https://hughfenghen.github.io/posts/2023/12/23/web-spy/) 通过重写或代理 BOM、DOM 实现一些骚操作
 - [前端领域的插件式设计](https://mp.weixin.qq.com/s/KdpLI0WBR_wyhGEbbqY6QQ)
 - [umami](https://github.com/umami-software/umami?tab=readme-ov-file) 替代 Google Analytics 的网站分析工具
 - [refline.js](https://github.com/refline/refline.js) 完全不依赖设计器环境的**参考线组件**
+
+Hooks 思路
+
+- [VueRequest](https://github.com/attojs/vue-request)
+- [swrv](https://docs-swrv.netlify.app/) 获取数据，和 VueRequest 差不多
+- [ahooks](https://github.com/alibaba/hooks) React hooks 库 阿里出品
+- [useHooks](https://usehooks.com/)
 
 Icon 图标
 
@@ -138,6 +150,7 @@ CSS
 - [Modern CSS Solutions](https://moderncss.dev/) 现代 CSS 特性精讲
 - [妙用 drop-shadow 实现酷炫线条光影效果](https://mp.weixin.qq.com/s?__biz=Mzg4MTYwMzY1Mw==&mid=2247499630&idx=1&sn=067668a13b4cefb2591d90e890c6d329&chksm=cf61da44f816535213af8560df4eaae6da3f4187ec6121d118762dd91f9aeb1e8365bccbfad7&scene=132#wechat_redirect)
 - [CSS 边框动画](https://web.dev/articles/css-border-animations?hl=zh-cn)
+- [Learn CSS](https://web.dev/learn/css) 系统教程，chrome 团队成员出品，需要些 magic
 
 3D
 
@@ -182,16 +195,21 @@ Canvas 引擎
 
 - [Create Your Own Compiler](https://citw.dev/tutorial/create-your-own-compiler) 交互式教程
 
-### 网络(内网)相关
+### 网络相关
 
 - [frp](https://github.com/fatedier/frp/blob/dev/README_zh.md)
 - [frpc desktop](https://github.com/luckjiawei/frpc-desktop)
 - [Localtunnel](https://theboroer.github.io/localtunnel-www/) npm 包，一行命令暴漏出去
+- [ChatTCP](https://chattcp.com/zh) ChatTCP 是一款 TCP 分析工具，致力于简化 TCP 分析，使其变得像看聊天记录一样简单！
 
 ### Git
 
 - [inside .git](https://jvns.ca/blog/2024/01/26/inside-git/) .git 目录中文件详解
 - [自己动手写 Git](https://wyag-zh.hanyujie.xyz/)
+
+### Web 服务器/Nginx
+
+- [Nginx Config - DigitalOcean](https://www.digitalocean.com/community/tools/nginx?global.app.lang=zhCN) 可视化配置 Nginx，对每个参数的作用有一定了解
 
 ## 设计资源/平台
 
@@ -244,13 +262,14 @@ Canvas 引擎
 - [AI Hub](https://www.aihub.cn/)
 - [Anakin.ai](https://app.anakin.ai/discover)
 
-### 音视频处理
+### 音视频
 
 - [ChatTTS](https://github.com/2noise/ChatTTS) 像是真人在讲话（包括停顿、语气、笑声）
 - [tiktokvoice](https://tiktokvoice.net/zh) 输入文字转成剪映内置的任意语音
 - [免费在线 AI 变声器](https://voicechanger.im/zh-CN)
 - [批量为本地视频生成字幕文件，并可将字幕文件翻译成其它语言](https://github.com/buxuku/VideoSubtitleGenerator)
 - [字幕工具箱](https://zm.i8k.tv/) 非 GPT 工具
+- [AI Hear](https://hear.thucydides.net/zh-cn/) 一款在您电脑本地运行的私有软件。一键开启多语种实时翻译，管理音频、译文和时间轴，即使身处没有网络的教室、地铁、商场或户外。不收集数据，保护隐私
 
 ### 图片编辑
 
@@ -289,13 +308,6 @@ Canvas 引擎
 
 - [4K HDR](https://4khdr.cn/)
 - [熊猫无损](https://www.xmwav.com/)
-
-## Hooks 思路
-
-- [VueRequest](https://github.com/attojs/vue-request)
-- [swrv](https://docs-swrv.netlify.app/) 获取数据，和 VueRequest 差不多
-- [ahooks](https://github.com/alibaba/hooks) React hooks 库 阿里出品
-- [useHooks](https://usehooks.com/)
 
 ## 英语学习
 
