@@ -104,6 +104,16 @@ Component({
   data: {
     _a: 'xxx',
   },
+
+  // 事件通信
+  methods: {
+    onTap: function () {
+      // 父组件可以 bindmyevent 也可以 bind:myevent 接收
+      // detailObj === evt.detail
+      // option: { bubbles: false, composed: false, capturePhase: false } 默认值都是false
+      this.triggerEvent('myevent', detailObj, option)
+    }
+  }
 })
 ```
 
@@ -119,6 +129,14 @@ Component({
 ```
 
 :::
+
+<hr/>
+
+如果开发一个 组件 A 要包含一个第三方组件 B，会发现：在`A.wxss`写的样式是无法影响到组件 B 的
+
+在[组件模板和样式](https://developers.weixin.qq.com/miniprogram/dev/framework/custom-component/wxml-wxss.html)中，提供了`externalClasses`和**引用页面或父组件的样式**两种方式，都不适合当前场景，这俩方法的前提是 组件 A 和 B 都是你自己维护的才行
+
+其实第三方组件基本都能被页面样式覆盖，所以样式还在`A.wxss`中维护，哪个页面用 A 组件了，在`页面.wxss`中`@import "path/to/A.wxss"`即可
 
 ### [WXML 语法](https://developers.weixin.qq.com/miniprogram/dev/reference/wxml/)
 
@@ -218,6 +236,12 @@ skyline 下，`scroll-view`就是 flex 容器。`scroll-x`就是`flex-direction:
 ![image](https://felbry.github.io/picx-images-hosting/image.4g4jbp73ho.webp)
 
 如果需要设置`gap`，参见[skyline 下的 flex 相关问题](./dev-problem#flex-相关问题)
+
+### picker
+
+picker 是没有宽高的，如果其子元素也没有宽高（比如空值且没有设定宽高），那永远也点不出来
+
+当和第三方组件 cell 搭配时，应该是`<picker><cell>...</cell></picker>`这种
 
 ## 全屏页面顶部数据获取
 
