@@ -103,7 +103,10 @@ export default defineConfig({
         },
         {
           text: 'uni-app',
-          items: [{ text: 'uni-app 使用 webview 自定义返回逻辑', link: '/uni-app/webview-back' }],
+          items: [
+            { text: 'uni-app 使用 webview 自定义返回逻辑', link: '/uni-app/webview-back' },
+            { text: 'uni-app 安卓下的 bitmap save 失败问题', link: '/uni-app/android-bitmap-save' },
+          ],
         },
         {
           text: '参考 Element Plus Demo 和 Vue SFC Playground 自定义预览组件',
