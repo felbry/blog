@@ -31,6 +31,7 @@ export default defineConfig({
             { text: '原生 VS Taro', link: '/miniprogram/native-vs-taro' },
             { text: '微信小程序开发手册', link: '/miniprogram/dev-handbook' },
             { text: '开发遇到的问题', link: '/miniprogram/dev-problem' },
+            { text: 'Worklet 动画', link: '/miniprogram/worklet' },
             { text: 'Taro', link: '/miniprogram/taro' },
           ],
         },

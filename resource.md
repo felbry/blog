@@ -70,6 +70,10 @@ sidebar: false
 - [Hello 算法](https://www.hello-algo.com/) 动画图解、一键运行的数据结构与算法教程
 - [visualgo](https://visualgo.net/zh) 可视化算法过程
 
+### 加密/解密
+
+- [在线加解密工具（纯前端）](https://github.com/dazhengs/tools) 支持 AES、SM4 加密，RSA、SM2 签名/验签，哈希算法，SM3，编码与密码生成的独立工具箱，可断网运行，确保安全性
+
 ### 设计模式
 
 - [设计模式目录](https://refactoringguru.cn/design-patterns/catalog)
@@ -84,6 +88,7 @@ sidebar: false
 
 - [Jimp](https://jimp-dev.github.io/jimp/) 图片处理（各种操作图片的 API）
 - [Fuse.js](https://www.fusejs.io/) 模糊搜索
+- [llama-ocr](https://github.com/Nutlope/llama-ocr) npm 库，使用 Llama 3.2 版本对本地或远程图片进行 OCR 识别
 
 ### 前端
 
@@ -249,6 +254,10 @@ Canvas 引擎
 - [Kopia](https://github.com/kopia/kopia/) 备份/恢复工具，快照保存到云存储/服务器/本地计算机上，可以指定文件/目录。有命令行和图形化界面。
 - [dokku](https://dokku.com/)
 
+## OCR
+
+- [AI OCR](https://functions-ocr.edgeone.app/) 在线免费 AI OCR（图片文字识别）工具，所使用的前端代码和 AI 提示词见[这里](https://github.com/TencentEdgeOne/pages-templates/blob/main/examples/functions-ocr/functions/ocr/index.js)，灵感来自[llama-ocr](https://github.com/Nutlope/llama-ocr)
+
 ## GPT
 
 - [阿里大模型服务平台百炼](https://www.aliyun.com/product/bailian) 开发应用调模型接口
@@ -269,6 +278,7 @@ Canvas 引擎
 - [免费在线 AI 变声器](https://voicechanger.im/zh-CN)
 - [批量为本地视频生成字幕文件，并可将字幕文件翻译成其它语言](https://github.com/buxuku/VideoSubtitleGenerator)
 - [字幕工具箱](https://zm.i8k.tv/) 非 GPT 工具
+- [爱幕](https://aimu.app/) 在线字幕处理
 - [AI Hear](https://hear.thucydides.net/zh-cn/) 一款在您电脑本地运行的私有软件。一键开启多语种实时翻译，管理音频、译文和时间轴，即使身处没有网络的教室、地铁、商场或户外。不收集数据，保护隐私
 
 ### 图片编辑

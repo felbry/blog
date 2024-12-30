@@ -158,6 +158,24 @@ Component({
 </view>
 ```
 
+#### [WXS 语法](https://developers.weixin.qq.com/miniprogram/dev/reference/wxs/)
+
+可以直接写在 wxml 中的`<wxs>`标签内，也可以`.wxs`为后缀的文件
+
+**可以把它作为 computed 在 wxml 中使用，增强模板。** 当报错时，考虑下是不是语法不支持
+
+<!-- prettier-ignore-start -->
+```html
+<wxs module="tools">
+const msg = 'hello'
+const bar = function (d) { return d }
+module.exports = { msg, bar }
+</wxs>
+<view> {{tools.msg}} </view>
+<view> {{tools.bar('world')}} </view>
+```
+<!-- prettier-ignore-end -->
+
 ### [npm 支持](https://developers.weixin.qq.com/miniprogram/dev/devtools/npm.html)
 
 官方的文档说的有些复杂，一些实际场景操作起来很快
@@ -203,11 +221,11 @@ this.setData({
 
 ## 组件
 
-### scroll-view
+### scroll-view（skyline）
 
 `type="custom" height="固定值"`，这俩直接设置，避免各种问题。（如果`scroll-x`时不设置`type="custom"`显示就会有问题；在低版本 skyline 中不设置`height`，内部元素无法撑开）
 
-skyline 下，`scroll-view`就是 flex 容器。`scroll-x`就是`flex-direction: row`，`scroll-y`就是`flex-direction: col`。其下的直接子元素自动填充其**交叉轴**高度。
+`scroll-view`就是 flex 容器。`scroll-x`就是`flex-direction: row`，`scroll-y`就是`flex-direction: col`。其下的直接子元素自动填充其**交叉轴**高度。
 
 ```html
 <scroll-view
@@ -236,6 +254,8 @@ skyline 下，`scroll-view`就是 flex 容器。`scroll-x`就是`flex-direction:
 ![image](https://felbry.github.io/picx-images-hosting/image.4g4jbp73ho.webp)
 
 如果需要设置`gap`，参见[skyline 下的 flex 相关问题](./dev-problem#flex-相关问题)
+
+`scroll-y`设置`align-items`不生效，不支持吗？
 
 ### picker
 
