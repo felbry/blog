@@ -156,15 +156,6 @@ module.exports = ({ strapi }) => ({
 const axios = require('axios')
 const APP_ID = ''
 const APP_SECRET = ''
-function makeRandomPassword(length) {
-  var result = ''
-  var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
-  var charactersLength = characters.length
-  for (var i = 0; i < length; i++) {
-    result += characters.charAt(Math.floor(Math.random() * charactersLength))
-  }
-  return result
-}
 module.exports = ({ strapi }) => ({
   async login(ctx) {
     const { code, userInfo } = ctx.request.body || {}
@@ -188,17 +179,16 @@ module.exports = ({ strapi }) => ({
       },
     })
     if (!user) {
-      const randomPass = makeRandomPassword(10)
-      const hashPass = await strapi.service('admin::auth').hashPassword(randomPass)
       user = await strapi.documents('plugin::users-permissions.user').create({
         // 通过admin面板，编辑User的Content Type，添加openid字段，右上角点击保存
         // 此时，生成src/extensions/users-permissions/content-types/user/schema.json
-        // 编辑json文件，将非必要字段设置成非必填（因此这里创建时我们就不需要填那么多无用字段了）
+        // 由于是面向微信用户的程序，编辑json文件
+        // 1. 将username、email字段的required设置成false（不能删除，删除默认就是true）
+        // 2. 暂不需要邮箱确认，confirmed默认值改为true
+        // 这样创建时我们就不需要填那么多无用字段了
+        // 该方式仅限于直接调create方法，在管理后台创建用户依然会对username和email做校验
         data: {
-          password: hashPass,
           openid,
-          confirmed: true,
-          blocked: false,
         },
         status: 'published',
       })

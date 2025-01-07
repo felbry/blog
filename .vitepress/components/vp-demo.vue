@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref, toRef } from 'vue'
+import { computed, ref } from 'vue'
 import { useClipboard, useToggle } from '@vueuse/core'
 import { usePlayground } from '../composables/use-playground.js'
 import SourceCode from './vp-source-code.vue'
