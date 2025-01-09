@@ -12,7 +12,13 @@
 
 `http://localhost:1337/admin/settings/media-library`
 
-默认响应式图片是开启的，一般关闭避免生成一堆图片增加存储压力
+默认响应式图片是开启的，一般关闭避免生成一堆图片增加存储压力（即使关闭了，在上传图片时也会生成一个缩略图版本）
+
+## 关闭草稿功能
+
+大部分场景是不需要草稿功能的，开启后会增加`documents API`使用复杂度，后台管理也增加了用户的心智成本
+
+在后台界面 - 表名 - 编辑 - 高级设置中，关闭“草稿和发布”，也可以在`content-types/<table-name>/schema.json`中将`options.draftAndPublish`的值置为`false`
 
 ## 插件 - Swagger API 文档
 

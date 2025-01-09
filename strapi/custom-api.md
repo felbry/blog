@@ -179,6 +179,10 @@ module.exports = ({ strapi }) => ({
       },
     })
     if (!user) {
+      // https://github.com/strapi/strapi/blob/v5.6.0/packages/plugins/users-permissions/server/controllers/user.js
+      const advanced = await strapi
+        .store({ type: 'plugin', name: 'users-permissions', key: 'advanced' })
+        .get()
       user = await strapi.documents('plugin::users-permissions.user').create({
         // 通过admin面板，编辑User的Content Type，添加openid字段，右上角点击保存
         // 此时，生成src/extensions/users-permissions/content-types/user/schema.json
@@ -189,8 +193,13 @@ module.exports = ({ strapi }) => ({
         // 该方式仅限于直接调create方法，在管理后台创建用户依然会对username和email做校验
         data: {
           openid,
+          // 默认角色也是必须的，否则生成的用户token请求有权限的接口时会报401错误
+          role: (
+            await strapi
+              .documents('plugin::users-permissions.role')
+              .findFirst({ filter: { type: { $eq: advanced.default_role } } })
+          ).id,
         },
-        status: 'published',
       })
     }
     ctx.body = {
