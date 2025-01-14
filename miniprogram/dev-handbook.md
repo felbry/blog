@@ -16,11 +16,14 @@
 
 **方案二**就是在 wxml 中写类名时，尽量考虑可读性高的替代方案：
 
-- 用`hex`替代`#`；用`_`替代`:`、`/`
+- `#` -> `hex`
+- `:`、`/` -> `_`
 
   `bg-#81ecec/50`替代为`bg-hex-81ecec_50`
 
-- 针对`hover:`和`active:`，设置`separators`分隔符（教程中使用的是`__`）
+- `.` -> `_dl_`
+
+- 针对`hover:`和`active:`，设置`separators`分隔符（默认配置是`__`）
 
   因此`hover:bg-red-500`替代为`hover__bg-red-500`
 
@@ -52,17 +55,27 @@
 
 ### [开发页面](https://developers.weixin.qq.com/miniprogram/dev/reference/api/Page.html)
 
+#### `Component`构造页面时，额外注意事项
+
 页面/组件统一用`Component`构建，页面相关函数放在`methods`中 [^1]
 
 此时页面 json 文件要包含`usingComponents`定义，可以为`{}` [^2]（如果不定义这个字段，会使得页面的 this 对象的原型稍有差异 [^3]）
 
-<hr />
+#### 页面跳转传参
 
 `Component`的`properties`可用来接收页面传参，如`/pages/index/index?paramA=123&paramB=xyz`，`paramA`和`paramB`可通过`properties`获取到 [^2]
 
 访问形式就是：`this.data.paramA`（`properties`和`data`字段都是通过`this.data.`访问）；如果在组件生命周期中访问值，最好是在`attached`及之后的钩子里访问，测试了一个`created`还访问不到传的值
 
-<hr />
+::: tip
+`properties`中声明的 query 属性，type 一般为`String`。这是因为跳转方法**传递参数**只能通过`url`属性传递，而该属性值只能是`String`
+
+除了`String`，可以声明为`Number`，这样`/path/to?timestamp=157352323`的`this.data.timestamp`会自动格式化为`Number`类型
+
+而数组和对象就不太清楚行不行了(暂时没试)，即使不行，可以在传递和接收时，用`JSON.parse`和`JSON.stringify`进行转换
+:::
+
+#### 页面生命周期
 
 [页面生命周期](https://developers.weixin.qq.com/miniprogram/dev/framework/app-service/page-life-cycle.html)：`onLoad` -> `onShow` -> `onReady`，之后可能触发`onHide`、`onUnload`。除了这些，还有许多如`onPullDownRefresh`这样的页面事件函数
 
@@ -162,19 +175,25 @@ Component({
 
 可以直接写在 wxml 中的`<wxs>`标签内，也可以`.wxs`为后缀的文件
 
-**可以把它作为 computed 在 wxml 中使用，增强模板。** 当报错时，考虑下是不是语法不支持
+**可以把它作为 computed 在 wxml 中使用，增强模板。**
 
 <!-- prettier-ignore-start -->
 ```html
 <wxs module="tools">
-const msg = 'hello'
-const bar = function (d) { return d }
-module.exports = { msg, bar }
+var msg = 'hello'
+var bar = function (d) { return d }
+module.exports = { msg: msg, bar: bar }
 </wxs>
 <view> {{tools.msg}} </view>
 <view> {{tools.bar('world')}} </view>
 ```
 <!-- prettier-ignore-end -->
+
+当报错时，考虑下是不是语法不支持，目前遇到的不支持的语法：
+
+- `for ... in`遍历对象 -> [polyfill 的方式比较麻烦，有些无解](https://developers.weixin.qq.com/community/develop/doc/000ece286546c0db98a7e74a951800?page=1#comment-list)
+- 所有 ES6 语法：`let`、字符串模板、对象方法简写（在`module.exports`时）
+- `try ... catch`
 
 ### [npm 支持](https://developers.weixin.qq.com/miniprogram/dev/devtools/npm.html)
 

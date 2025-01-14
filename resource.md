@@ -4,7 +4,7 @@ sidebar: false
 
 # 资源整理
 
-## 前端-组件/库/框架
+## 组件/库/框架（前端）
 
 ### 纯 UI + JS
 
@@ -103,6 +103,7 @@ sidebar: false
 - [前端领域的插件式设计](https://mp.weixin.qq.com/s/KdpLI0WBR_wyhGEbbqY6QQ)
 - [umami](https://github.com/umami-software/umami?tab=readme-ov-file) 替代 Google Analytics 的网站分析工具
 - [refline.js](https://github.com/refline/refline.js) 完全不依赖设计器环境的**参考线组件**
+- [ViSelect](https://github.com/simonwep/selection) 可视化拖拉选择 DOM 元素，支持移动端
 
 Hooks 思路
 
@@ -114,6 +115,7 @@ Hooks 思路
 Icon 图标
 
 - [tabler](https://tabler.io/icons) 5700+风格统一 Icon
+- [heroicons](https://heroicons.com/) tailwindcss 团队出品
 
 虚拟滚动
 
@@ -174,7 +176,8 @@ SVG
 
 打印
 
-- [HiPrint](http://hiprint.io/) 打印库
+- [print.js](https://github.com/crabbly/print.js) github 收藏数挺高的
+- [HiPrint](http://hiprint.io/) 闭源、可能比较旧。但是在线示例挺丰富的，可以当作是 print.js 的备选补充
 - [怎么写 CSS 的打印样式](https://voussoir.net/writing/css_for_printing)
 
 拖拉拽
@@ -215,6 +218,10 @@ Canvas 引擎
 ### Web 服务器/Nginx
 
 - [Nginx Config - DigitalOcean](https://www.digitalocean.com/community/tools/nginx?global.app.lang=zhCN) 可视化配置 Nginx，对每个参数的作用有一定了解
+
+### 安全/服务器防护
+
+- [雷池 WAF](https://github.com/chaitin/safeline) 有个人版，也有商业版
 
 ## 设计资源/平台
 
@@ -280,6 +287,7 @@ Canvas 引擎
 - [字幕工具箱](https://zm.i8k.tv/) 非 GPT 工具
 - [爱幕](https://aimu.app/) 在线字幕处理
 - [AI Hear](https://hear.thucydides.net/zh-cn/) 一款在您电脑本地运行的私有软件。一键开启多语种实时翻译，管理音频、译文和时间轴，即使身处没有网络的教室、地铁、商场或户外。不收集数据，保护隐私
+- [AnyVoice](https://anyvoice.net/zh/ai-voice-cloning) 3 秒克隆声音
 
 ### 图片编辑
 
