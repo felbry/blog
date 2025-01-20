@@ -82,9 +82,16 @@ module.exports = createCoreController('api::children.children', ({ strapi }) => 
     const sanitizedQueryParams = await this.sanitizeQuery(ctx)
     const { results, pagination } = await strapi.service('api::children.children').find(sanitizedQueryParams)
     const sanitizedResults = await this.sanitizeOutput(results, ctx)
+
+    // 在业务逻辑前，对输入进行验证是有必要的，上方是对query进行校验和消毒，也有针对data的方法
+    // https://docs.strapi.io/dev-docs/backend-customization/controllers#sanitization-and-validation-in-controllers
+    await this.validateInput(ctx.request.body, ctx)
+    const sanitizedBody = await this.sanitizeInput(ctx.request.body, ctx)
   },
   // 和默认controller同名的，会覆盖
   async create(ctx) {
+    // ctx的属性/方法：https://docs.strapi.io/dev-docs/backend-customization/requests-responses
+
     // 如果要覆盖默认的，建议通过super直接调用，再加额外的逻辑
     const { data, meta } = await super.find(ctx)
   }
@@ -95,7 +102,9 @@ module.exports = createCoreController('api::children.children', ({ strapi }) => 
 
 ```javascript
 module.exports = ({ strapi }) => ({
-  async method1(ctx) {},
+  async method1(ctx) {
+    // ctx的属性/方法：https://docs.strapi.io/dev-docs/backend-customization/requests-responses
+  },
 })
 ```
 
@@ -139,6 +148,7 @@ module.exports = {
 // 但是更推荐返回一个函数，函数返回值是对象字面量。因为这样可以访问到strapi这个对象
 module.exports = ({ strapi }) => ({
   async login(ctx) {
+    // ctx的属性/方法：https://docs.strapi.io/dev-docs/backend-customization/requests-responses
     ctx.body = 'hello world'
   },
 })

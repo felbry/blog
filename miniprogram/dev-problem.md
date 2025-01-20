@@ -59,6 +59,10 @@ Component({
 
 `new Date('2021-7-7 14:59:32')`本地开发是个正常日期对象，iOS 真机是`NAN`
 
+开发工具监测到这种写法时，也会提示：
+
+> new Date("2025-01-21 09:00:00") 在部分 iOS 下无法正常使用，iOS 只支持 "yyyy/MM/dd"、"yyyy/MM/dd HH:mm:ss"、"yyyy-MM-dd"、"yyyy-MM-ddTHH:mm:ss"、"yyyy-MM-ddTHH:mm:ss+HH:mm" 的格式
+
 ### js 文件间的 import 和 export
 
 ```bash

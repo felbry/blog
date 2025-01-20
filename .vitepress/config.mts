@@ -12,7 +12,7 @@ export default defineConfig({
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
-      { text: '技术', link: '/summary' },
+      { text: '技术笔记', link: '/summary' },
       { text: '资源整理', link: '/resource' },
     ],
 
@@ -113,6 +113,7 @@ export default defineConfig({
           text: '参考 Element Plus Demo 和 Vue SFC Playground 自定义预览组件',
           link: '/vue-repl-playground',
         },
+        { text: 'UnoCSS', link: '/unocss' },
         { text: 'Node.js 常用 API', link: '/nodejs-api' },
         { text: 'CSP', link: '/csp' },
         { text: 'Master Go', link: '/mastergo/all' },
@@ -130,6 +131,7 @@ export default defineConfig({
   vite: {
     server: {
       host: '127.0.0.1',
+      port: 5174,
     },
     plugins: [appendDemoImportsToMd({ examplesRoot: path.resolve('examples') })],
   },
