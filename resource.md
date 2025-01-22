@@ -229,6 +229,10 @@ Canvas 引擎
 - [penpot](https://penpot.app/)
 - [【文章】Figma 替代品 Penpot 安装和使用教程](https://www.cnblogs.com/ryanyangcs/p/18373553)
 
+有创意的网站效果
+
+- [豆瓣 2024 年度电影榜单](https://movie.douban.com/annual/2024/) **滚动时**电影经典画面渐隐渐显效果
+
 ## HTTPS 证书
 
 - [Certimate](https://github.com/usual2970/certimate) 一个自搭建的开源平台，可以为自己的域名申请、部署、续期 SSL 证书

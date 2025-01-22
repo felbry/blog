@@ -24,6 +24,22 @@
 
 ## 通性
 
+### 自定义 tabbar 的 tab 激活问题
+
+tab 激活的几种场景：
+
+- 正常进入，默认激活首页，用户再手动点击其它 tab
+
+  该场景只需要设置`selected`的默认值和`onSwitchTab`事件即可
+
+- 用户从某个分享页或是其它场景**启动**，没在首页
+
+  需要设置`ready`的生命周期函数，通过`getCurrentPages`获取当前页面来动态设置 tab
+
+- 用户在某个页面，完成交互后代码`switchTo`到了某个 tabbar 页面
+
+  此时由于自定义 tabbar 无法监听页面生命周期函数，也不能二次触发`ready`。只能把激活的逻辑判断写在对应的页面里。还有种更省事的办法就是尽量规避这种场景（比如只`switchTo`到最近激活的一个 tabbar 页面）
+
 ### tabbar 遮挡问题
 
 参考[小程序 tabBar 层级 z-index 问题，自定义弹窗遮挡不住](https://developers.weixin.qq.com/community/develop/doc/000ee4ccd6cfa8a67da76bad251000)
