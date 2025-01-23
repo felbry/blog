@@ -99,7 +99,7 @@ export default defineConfig({
             { text: '创建/自定义接口', link: '/strapi/custom-api' },
             { text: '抛错', link: '/strapi/throw-error' },
             { text: 'strapi.xxx', link: '/strapi/strapi-api' },
-            { text: '表相关', link: '/strapi/table' },
+            { text: 'REST/Document 操作', link: '/strapi/rest-document' },
           ],
         },
         {
