@@ -203,6 +203,8 @@ module.exports = ({ strapi }) => ({
         // 该方式仅限于直接调create方法，在管理后台创建用户依然会对username和email做校验
         data: {
           openid,
+          // provider是必须的，也可以尝试在schema中设置defaultValue。如果该值为null，在web端通过邮箱和密码请求登录接口/api/auth/local时，就会报400的错误
+          provider: 'local',
           // 默认角色也是必须的，否则生成的用户token请求有权限的接口时会报401错误
           role: (
             await strapi

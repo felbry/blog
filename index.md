@@ -7,7 +7,7 @@ hero:
   text: '个人博客'
   actions:
     - theme: brand
-      text: 技术
+      text: 技术笔记
       link: /summary
 
 features:

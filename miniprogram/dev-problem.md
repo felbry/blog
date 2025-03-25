@@ -4,6 +4,12 @@
 
 可以通过[Skyline 更新日志](https://developers.weixin.qq.com/miniprogram/dev/framework/runtime/skyline/changelog.html)随时了解 skyline 的问题解决进度
 
+### 不支持`:host`选择器
+
+截止到 2025/3/25，[特性状态](https://developers.weixin.qq.com/miniprogram/dev/framework/runtime/skyline/status.html)的“支持:host 选择器”仍然是规划中
+
+同时也可能不支持[virtualHost](https://developers.weixin.qq.com/miniprogram/dev/framework/custom-component/wxml-wxss.html#%E8%99%9A%E6%8B%9F%E5%8C%96%E7%BB%84%E4%BB%B6%E8%8A%82%E7%82%B9)，已在开发者社区反馈：https://developers.weixin.qq.com/community/develop/doc/000c687ff1cad8b12213f294561400
+
 ### flex 相关问题
 
 文档说默认元素的`display`为`flex`，但`flex-direction`默认是`column`
@@ -14,7 +20,7 @@
 
 `type`属性在文档中是可选，但横向滚动时必须指定（比如`type="custom"`），否则展示有问题
 
-既然默认所有元素都是 flex，那为啥`scroll-view`的子元素高度撑不起它呢？这个问题在 skyline[`1.4.2`](https://developers.weixin.qq.com/miniprogram/dev/framework/runtime/skyline/changelog.html#_1-4-2-2024-11-19)解决，在此之前，都需要显式设置`scroll-view`的高度
+`scroll-view`的子元素高度撑不起它本身：这个问题在 skyline[`1.4.2`](https://developers.weixin.qq.com/miniprogram/dev/framework/runtime/skyline/changelog.html#_1-4-2-2024-11-19)解决，在此之前，都需要显式设置`scroll-view`的高度。高版本的可以启用[`enableScrollViewAutoSize`](https://developers.weixin.qq.com/miniprogram/dev/framework/runtime/skyline/wxss.html#%E5%BC%80%E5%90%AFscroll-view%E8%87%AA%E5%8A%A8%E6%92%91%E5%BC%80)
 
 ### 页面 background-color: #fff 无效？
 
