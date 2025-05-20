@@ -25,6 +25,7 @@ export default defineConfig({
       // "/team-management": [{ text: "Git", link: "/team-management/git" }],
       '/': [
         { text: '简介', link: '/summary' },
+        { text: 'Git', link: '/git' },
         {
           text: '微信小程序',
           items: [

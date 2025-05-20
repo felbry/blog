@@ -23,6 +23,8 @@
 
 - `.` -> `_dl_`
 
+- `!` -> `_el_`
+
 - 针对`hover:`和`active:`，设置`separators`分隔符（默认配置是`__`）
 
   因此`hover:bg-red-500`替代为`hover__bg-red-500`

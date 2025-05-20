@@ -23,6 +23,7 @@ sidebar: false
 - [Quasar](https://quasar.dev/start/quick-start)
 - [VARLET](https://varletjs.org/#/zh-CN/index)
 - [Surely Vue](https://www.surely.cool/doc/guide#%E7%AE%80%E4%BB%8B) Vue3 高级组件（树、表格）
+- [OpenTiny](https://opentiny.design/tiny-vue/zh-CN/os-theme/components/button) tiny-vue 组件挺多的
 
 ### Web Compnent
 
@@ -140,6 +141,7 @@ Axios
 Web Component
 
 - [2023 Web Components 现状](https://blog.5bang.top/2023/04/21/2023_state_of_web_component) 把当前 Web Components 具备的功能、标准规范逐个分析了下。列举了一些主流公司在用的一些案例。对于想要整体了解 Web Components 的知识 很有帮助
+- [Plain Vanilla Sites](https://plainvanillaweb.com/pages/sites.html) Web Component 系统教程
 
 Devtool
 
