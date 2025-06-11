@@ -16,6 +16,7 @@ sidebar: false
 - [HorizonUI](https://horizon-ui.com/)
 - [NextUI](https://nextui.org/)
 - [Magic UI](https://magicui.design/) 特点是每个组件都有精心设计的动画
+- [React Bits](https://www.reactbits.dev/) 动画组件
 
 ### Vue
 
@@ -24,12 +25,20 @@ sidebar: false
 - [VARLET](https://varletjs.org/#/zh-CN/index)
 - [Surely Vue](https://www.surely.cool/doc/guide#%E7%AE%80%E4%BB%8B) Vue3 高级组件（树、表格）
 - [OpenTiny](https://opentiny.design/tiny-vue/zh-CN/os-theme/components/button) tiny-vue 组件挺多的
+- [Ant Design X Vue](https://antd-design-x-vue.netlify.app/) AI 产品组件库
+- [Inspira UI](https://inspira-ui.com/components) 动画组件
 
 ### Web Compnent
+
+完整库
 
 - [mdui](https://www.mdui.org/zh-cn/)
 - [shoelace](https://shoelace.style/)
 - [Quark Design](https://quark-ecosystem.github.io/quarkd-docs/) 哈啰团队出品
+- [Web Awesome](https://backers.webawesome.com/docs/components/input/)
+
+单组件
+
 - [mumuy/widget-qrcode](https://github.com/mumuy/widget-qrcode) 二维码组件
 
 ### [Alpine.js](https://alpinejs.dev/)
@@ -58,6 +67,13 @@ sidebar: false
 - [rxdrag](https://rxdrag.vercel.app/) 开源，可视化搭建页面
 
 ## 软件工程
+
+### 支付
+
+个体能使用的，扣一定手续费（小体量且能用支付宝平台可以考虑支付宝的当面付）
+
+- [H5 支付](https://h5zhifu.com/)
+- [XorPay](https://xorpay.com/)
 
 ### 数据库
 
@@ -105,6 +121,14 @@ sidebar: false
 - [umami](https://github.com/umami-software/umami?tab=readme-ov-file) 替代 Google Analytics 的网站分析工具
 - [refline.js](https://github.com/refline/refline.js) 完全不依赖设计器环境的**参考线组件**
 - [ViSelect](https://github.com/simonwep/selection) 可视化拖拉选择 DOM 元素，支持移动端
+
+WebSocket
+
+[supa-simple-socket](https://github.com/JustinGastby/supa-simple-socket) 封装好的 WebSocket 库
+
+iframe
+
+- [一站式 iframe 生成器](https://iframegenerator.top/) 可视化了解 iframe 的任何参数
 
 Hooks 思路
 
@@ -174,7 +198,9 @@ SVG
 - [lordicon](https://lordicon.com/) 部分免费的动态 SVG 图标
 - [KanjiVG](https://kanjivg.tagaini.net/viewer.html) 汉字 SVG 资源
 - [svg path editor](https://yqnn.github.io/svg-path-editor/)
+- [SVGOMG](https://jakearchibald.github.io/svgomg/) SVG 各种可视化配置
 - [canvg](https://github.com/canvg/canvg?tab=readme-ov-file) 将 svg 转换成 canvas 绘制代码，有一个[SVG to Canvas Converter](https://demo.qunee.com/svg2canvas/)就是基于它，提供在线功能
+- [path-motion](https://github.com/YYsuni/path-motion) 路径动画开发工具
 
 打印
 
@@ -189,12 +215,14 @@ SVG
 
 动画
 
+- [Navnav+](https://thuvien.org/navnav) 各种场景的动画效果集合，可以找灵感使用
 - [Atropos](https://atroposjs.com/) 3D 视差效果
 - [Canvas Confetti](https://www.kirilv.com/canvas-confetti/) 抛洒纸屑、星星
 - [Animista](https://animista.net/) 预览常见动画效果，可快速复制 CSS 代码（比较全）
 - [animastore](http://guowc.github.io/animastore/) 预览常见动画效果，可快速复制 CSS 代码（中文的，效果没上一个全，也不能调参数）
 - [Framer Motion](https://www.framer.com/motion/) React 动画库
 - [gsap](https://gsap.com/pricing/)
+- [barba.js](https://barba.js.org/)
 
 Canvas 引擎
 
@@ -205,12 +233,14 @@ Canvas 引擎
 
 - [Create Your Own Compiler](https://citw.dev/tutorial/create-your-own-compiler) 交互式教程
 
-### 网络相关
+### 网络相关（内网穿透、本地网络监控、...）
 
 - [frp](https://github.com/fatedier/frp/blob/dev/README_zh.md)
 - [frpc desktop](https://github.com/luckjiawei/frpc-desktop)
 - [Localtunnel](https://theboroer.github.io/localtunnel-www/) npm 包，一行命令暴漏出去
 - [ChatTCP](https://chattcp.com/zh) ChatTCP 是一款 TCP 分析工具，致力于简化 TCP 分析，使其变得像看聊天记录一样简单！
+- [nps](https://github.com/ehang-io/nps/blob/master/README_zh.md)
+- [WatchYourLAN](https://github.com/aceberg/WatchYourLAN) 本地设备连接监控
 
 ### Git
 
@@ -224,6 +254,22 @@ Canvas 引擎
 ### 安全/服务器防护
 
 - [雷池 WAF](https://github.com/chaitin/safeline) 有个人版，也有商业版
+
+### 定位/自动化/IP 池
+
+- [影梭 ZCShou/GoGoGo](https://github.com/ZCShou/GoGoGo) 用于 Android 8.0+ 的无需 ROOT 权限的虚拟定位 APP
+- [按键精灵](https://www.anjian.com/) 自动化工具
+- [Proxy302](https://www.proxy302.com/) 全球代理 IP 自助超市
+
+### 终端
+
+- [Starship](https://starship.rs/zh-CN/guide/) rust 构建的轻量、迅速、客制化的高颜值终端！
+- [termora](https://github.com/TermoraDev/termora) Termora is a terminal emulator and SSH client for Windows, macOS and Linux.
+- [fishshell](https://fishshell.com/) fish is a smart and user-friendly command line shell for Linux, macOS, and the rest of the family.
+
+### 操作系统
+
+- [1000 行代码的操作系统](https://operating-system-in-1000-lines.vercel.app/zh/)
 
 ## 设计资源/平台
 
@@ -243,13 +289,25 @@ Canvas 引擎
 ## 开源系统（杂）
 
 - [xiaoju survey 问卷系统](https://github.com/didi/xiaoju-survey)
-- [Stirling-PDF](https://stirlingtools.com/)
 - [GammaRay](https://github.com/RGAA-Software/GammaRay) 不同设备之间推流
 - [Webp Server Go](https://github.com/webp-sh/webp_server_go) 代理图片地址，将图片转为 WebP/AVIF 格式，达到压缩图片体积的目的
 - [mcfly](https://github.com/cantino/mcfly) 快速查找 shell 历史纪录，定位到需要的命令（目前在 zsh 环境下没试成功）
-- [excalidraw](https://excalidraw.com/) 白板绘画
 - [liumengniu/majiang](https://github.com/liumengniu/majiang) 麻将系统
 - [zyronon/douyin](https://github.com/zyronon/douyin) 仿抖音短视频项目
+- [yjs](https://github.com/yjs/yjs) 基于 CRDT 算法，用于构建协同程序（比如在线文档、多人协作的富文本编辑器）。这里有个[Learn Yjs by jamsocket](https://learn.yjs.dev/)的案例，可以入门学习体验
+
+笔记软件
+
+- [Xournal++](https://xournalpp.github.io/) 跨平台、手写
+
+白板绘画
+
+- [excalidraw](https://excalidraw.com/)
+- [drawnix](https://drawnix.com/)
+
+音乐
+
+- [blackcandy](https://github.com/blackcandy-org/blackcandy) 自建音乐流服务
 
 后台管理
 
@@ -274,6 +332,10 @@ Canvas 引擎
 ## GPT
 
 - [阿里大模型服务平台百炼](https://www.aliyun.com/product/bailian) 开发应用调模型接口
+
+### 数字人
+
+- [AIGCPanel](https://aigcpanel.com/) 开源免费
 
 ### 资讯/综合站
 
@@ -301,6 +363,7 @@ Canvas 引擎
 - [pangxiaobin/image-matting](https://github.com/pangxiaobin/image-matting) 利用本地模型实现图片抠图
 - [photo4you](https://photo4you.win/) AI 证件照
 - [HivisionIDPhoto](https://github.com/Zeyi-Lin/HivisionIDPhotos) AI 证件照-开源
+- [Google AI Studio - Gemini 2.0 Flash 去水印](https://aistudio.google.com/prompts/new_chat?model=gemini-2.0-flash&utm_source=deepmind.google&utm_medium=referral&utm_campaign=gdm&utm_content=)
 
 ### 代码生成
 
@@ -328,11 +391,6 @@ Canvas 引擎
 - [Ventoy](https://www.ventoy.net/cn/index.html) 开源项目，装系统首选
 - [iventoy](https://www.iventoy.com/cn/index.html)
 
-## 影音资源
-
-- [4K HDR](https://4khdr.cn/)
-- [熊猫无损](https://www.xmwav.com/)
-
 ## 英语学习
 
 - [Siphon 吸词](https://siphon.ink/dashboard)
@@ -347,31 +405,47 @@ Canvas 引擎
 
 - [软考高级架构师备考记录](https://nekonull.me/posts/ruankao-architect/)
 
-## 定位/自动化/IP 池
-
-- [影梭 ZCShou/GoGoGo](https://github.com/ZCShou/GoGoGo) 用于 Android 8.0+ 的无需 ROOT 权限的虚拟定位 APP
-- [按键精灵](https://www.anjian.com/) 自动化工具
-- [Proxy302](https://www.proxy302.com/) 全球代理 IP 自助超市
-
 ## PPT
 
+可以通过 deepseek+kimi 的模式快速产出，理论上这个话题终结
+
 - [freepiker](https://freepiker.com/category/presentations/powerpoint?order=default&&type=free) 免费模板质量较高，下载方便
-- [免费在线 AI 一键生成 PPT](https://aipptmaker.ai/cn)
 
 ## 文件转换
 
+- [Next BConvert](https://nextbconvert.com/) 免费本地批量转换图像、音频和文档的工具。像是全能王
+- [PDF24 Tools](https://tools.pdf24.org/zh/) 免费 PDF 全能工具
 - [lightpdf](https://lightpdf.com/)
 - [i love pdf](https://www.ilovepdf.com/zh-cn/pdf_to_word)
 - [Convertio](https://convertio.co/zh/) 各种文件转换
 
-## 下载网站及工具（视频/音频）
+## 影音（资源、工具）
+
+视频
+
+- [4K HDR](https://4khdr.cn/)
+
+音乐
 
 - [熊猫无损](https://www.xmwav.com/)
+
+下载工具
+
 - [gopeed](https://gopeed.com/zh-CN) 一款现代化的下载器，开源、轻量、原生，支持（HTTP、BitTorrent、Magnet 等）协议下载
 - [cobalt](https://github.com/imputnet/cobalt) 粘贴链接，下载视频
 
-## 学生/宝宝相关
+iptv
 
+- [DIYP](https://github.com/InGramViking/diypapk) 不知道干啥的，还没研究
+- [fanmingming/live](https://github.com/fanmingming/live) 可直连访问的电视/广播图标库与相关工具项目
+
+在线
+
+- [TV Garden](https://tv.garden/) 世界各地的电视台在线观看
+
+## 学生/宝宝学习相关
+
+- [BeddyStories](https://beddystories.com/zh) 睡前故事
 - [aspoem](https://aspoem.com/zh-Hans) 现代化中国诗词学习网站
 - [poetrystrands](https://poetrystrands.com/zh) 古诗词连字游戏
 - [全历史](https://www.allhistory.com/)
@@ -416,10 +490,15 @@ Canvas 引擎
 - [OpenBB](https://github.com/OpenBB-finance/OpenBB)
 - [期货和期权市场知识 - 芝商所](https://www.cmegroup.com/cn-s/education/courses.html#filters=getting-started) 直连不一定访问通
 
-## 优秀独立个人站
+## 生活技能
 
-- [Moonvy 月球背面](https://moonvy.com/blog/)
+医疗知识
+
+- [默沙东诊疗手册](https://www.msdmanuals.cn/)
+- [妙佑医疗国际](https://www.mayoclinic.org/zh-hans/diseases-conditions)
 
 ## 其它
 
 - [Web 版 红白机](https://www.webrcade.com/) 网页上玩小时候的游戏
+- [Moonvy 月球背面](https://moonvy.com/blog/) 月球背面的博客网站
+- [Keep Track](https://app.keeptrack.space/) 查看卫星 🛰
