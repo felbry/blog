@@ -1,81 +1,174 @@
 # Zed
 
-## 常用配置
+## 认识 Zed 的配置策略
 
-[自动换行](https://zed.dev/docs/configuring-zed#soft-wrap)
+当你打开一个文件时，Zed 会**自动**根据[Language Support in Zed](https://zed.dev/docs/languages#language-support-in-zed)去下载该语言的 **LSP** 和 Tree-sitter
+
+- LSP（语言服务器协议）：提供了语义功能，一种语言可具备多个 LSP，可提供的特性：
+
+  - 代码补全
+  - 错误检查和诊断
+  - 代码导航（转到定义、查找引用）(F12: Go to Definition / Cmd + F12: Go to Type Definition / Shift + F12: Find All References)
+  - code actions（重命名、提取方法、`source.fixAll`）
+  - 悬停信息
+  - 工作区符号搜索
+  - [Inlay Hints](https://zed.dev/docs/configuring-languages#inlay-hints) 内嵌提示
+  - ...
+
+- Tree-sitter：提供语法高亮和大纲面板这类基础结构功能
+
+::: tip 如何识别特殊后缀文件？
+通过[file_types](https://zed.dev/docs/configuring-zed#file-types)手动配置
 
 ```json
-{ "soft_wrap": "editor_width" }
+{
+  "file_types": {
+    "Shell Script": [".env.*"],
+    "HTML": ["wxml"]
+  }
+}
 ```
 
-[TabSize](https://zed.dev/docs/configuring-zed#tab-size)
+:::
 
-```json
-{ "tab_size": 2 }
-```
+因此，你需要知道“**一个语言有哪些配置**”和“**某个 LSP 有哪些配置**”
 
-[失焦自动保存](https://zed.dev/docs/configuring-zed#autosave)
+### 配置语言
 
-```json
-{ "autosave": "on_focus_change" }
-```
-
-## 项目级别的配置
-
-每个项目的配置可能有差异：
-
-- 不同项目的缩进不一致
-- 有的项目用 ESLint 格式化，有的项目用 prettier
-
-通过在项目根目录创建`.zed/settings.json`进行配置（也可以`Command + Shift + P`，选择`zed: open local settings`快捷创建）
-
-## LSP（Language Server Protocol）
-
-一种语言文件 可对应 多个 LSP。
-
-语言服务器可提供的特性：
-
-- 代码补全
-- 错误检查和诊断
-- 代码导航（转到定义、查找引用）(F12: Go to Definition / Cmd + F12: Go to Type Definition / Shift + F12: Find All References)
-- code actions（重命名、提取方法、`source.fixAll`）
-- 悬停信息
-- 工作区符号搜索
-- [Inlay Hints](https://zed.dev/docs/configuring-languages#inlay-hints)
-- ...
-
-当打开一个文件时，Zed 会自动下载和更新相对应的 LSP。
-
-### 手动配置某个语言文件关联的 LSP
+在全局的`languages`中配置某个语言
 
 ```json
 "languages": {
   "PHP": {
-    "language_servers": ["intelephense", "!phpactor", "..."]
+    ...
   }
 }
 ```
 
-- `intelephense`为首要语言服务器
-- `phpactor`被禁用（`!`表示禁用）
-- `...`表示保留其它默认 LSP 的设置
+完整的配置项如下：
 
-### 手动禁用某个语言文件关联的全部 LSP
+- `tab_size` 每个缩进级别的空格数
+- `formatter` （既可以在全局配置、也可以在`languages`的某个语言配置）
 
-```json
-"languages": {
-  "Markdown": {
-    "enable_language_server": false
+  ::: details
+
+  方式 1：固定值`language_server`，代表使用当前 LSP 提供的 format 能力
+
+  ```json
+  {
+    "formatter": "language_server"
   }
-}
-```
+  ```
 
-### 自定义某个 LSP 的配置
+  方式 2：`external` **(只用 Prettier 推荐这种方式)**
+
+  !!! prettier 配置暂未验证成功，需调试
+
+  ```json
+  // prettier之所以要加--stdin-filepath，可能不指定文件就会格式这个工程的文件？
+  // {buffer_path}应该属于zed的变量？表明当前文件路径？不像是系统变量，因为在一个目录运行buffer_path肯定不能确定是哪一个文件。
+  {
+    "formatter": {
+      "external": {
+        "command": "prettier",
+        "arguments": ["--stdin-filepath", "{buffer_path}"]
+      }
+    }
+  }
+  ```
+
+  ```json
+  // 由于sed命令是直接从标准输入获取内容，而zed默认是将当前缓冲区的文本作为标准输入传，因此不用像prettier那样加--stdin-filepath？
+  // 以下等同于：sed -e 's/ *$//'
+  {
+    "formatter": {
+      "external": {
+        "command": "sed",
+        "arguments": ["-e", "s/ *$//"]
+      }
+    }
+  }
+  ```
+
+  通过`command`指定命令，`argument`指定参数或值。可以执行命令行中能运行的任意命令，命令的标准输出（stdout）将会直接写入当前文件中。
+
+  方式 3：LSP 提供的 code action **(只用 ESLint 推荐这种方式)**
+
+  ```json
+  {
+    "formatter": {
+      "code_actions": {
+        // Use ESLint's --fix:
+        "source.fixAll.eslint": true,
+        // Organize imports on save:
+        "source.organizeImports": true
+      }
+    }
+  }
+  ```
+
+  方式四：数组形式结合多个
+
+  ```json
+  {
+    "formatter": [
+      {"language_server": {"name": "rust-analyzer"}},
+      {"external": {
+        "command": "sed",
+        "arguments": ["-e", "s/ *$//"]
+      }
+    ]
+  }
+  ```
+
+  :::
+
+- `format_on_save`
+- `enable_language_server`
+
+  手动禁用 Markdown 语言文件关联的全部 LSP
+
+  ```json
+  "languages": {
+    "Markdown": {
+      "enable_language_server": false
+    }
+  }
+  ```
+
+- `hard_tabs` 使用制表符缩进而不是空格
+- `perferred_line_length` 建议的最大行长度
+- `soft_wrap` 如何换行长行代码
+- `show_completions_on_input` 【新增】是否在输入时显示补全
+- `show_completion_documentation`【新增】
+
+之前有，但最新文档没提的（推测还能用）
+
+- ~~`code_actions_on_format`~~
+- ~~`language_servers`~~
+
+  手动配置 PHP 语言文件关联的 LSP
+
+  ```json
+  "languages": {
+    "PHP": {
+      "language_servers": ["intelephense", "!phpactor", "..."]
+    }
+  }
+  ```
+
+  - `intelephense`为首要语言服务器
+  - `phpactor`被禁用（`!`表示禁用）
+  - `...`表示保留其它默认 LSP 的设置
+
+### [配置 LSP](https://zed.dev/docs/configuring-zed#lsp)
 
 ::: tip
 以下 lsp 的配置中，出现了`init_options`、`settings`、`initialization_options`等字段，具体取决于每个 lsp 自身的配置方式。
 
 比如配置 emmet，在[zed 文档 - Emmet](https://zed.dev/docs/languages/emmet)中，查看对应的 lsp 文档，能清楚看到`init_options`和其配置项的说明。
+
+在 Zed 的文档中，仅提到了`settings`和`initialization_options`，尚不清楚它内部能否自动将`initialization_options`转化为对于 LSP 所需要的`init`字段
 :::
 
 ```json
@@ -116,102 +209,29 @@
 }
 ```
 
-## 配置语言
+## 配置实操
 
-在 LSP 一节中，我们已经看到了如何配置某个语言。比如要配置`PHP`，可以这样：
-
-```json
-"languages": {
-  "PHP": {
-    ...
-  }
-}
-```
-
-完整的配置项如下：
-
-- `tab_size` 每个缩进级别的空格数
-- `formatter`
-- `formatter_on_save`
-- `code_actions_on_format`
-- `language_servers`
-- `enable_language_server`
-- `hard_tabs` 使用制表符缩进而不是空格
-- `perferred_line_length` 建议的最大行长度
-- `soft_wrap` 如何换行长行代码
-
-### formatter 详解
-
-方式 1：指定某个 LSP
+### 通用配置
 
 ```json
 {
-  "formatter": "language_server"
+  // 自动换行 https://zed.dev/docs/configuring-zed#soft-wrap
+  "soft_wrap": "editor_width",
+  // tabSize https://zed.dev/docs/configuring-zed#tab-size
+  "tab_size": 2,
+  // 失焦自动保存 https://zed.dev/docs/configuring-zed#autosave
+  "autosave": "on_focus_change"
 }
 ```
 
-方式 2：`external` **(只用 Prettier 推荐这种方式)**
+### 项目级别的配置
 
-::: warning
-prettier 配置暂未验证成功，需调试
-:::
+每个项目的配置可能有差异：
 
-```json
-// prettier之所以要加--stdin-filepath，可能不指定文件就会格式这个工程的文件？
-// {buffer_path}应该属于zed的变量？表明当前文件路径？不像是系统变量，因为在一个目录运行buffer_path肯定不能确定是哪一个文件。
-{
-  "formatter": {
-    "external": {
-      "command": "prettier",
-      "arguments": ["--stdin-filepath", "{buffer_path}"]
-    }
-  }
-}
-```
+- 不同项目的缩进不一致
+- 有的项目用 ESLint 格式化，有的项目用 prettier
 
-```json
-// 由于sed命令是直接从标准输入获取内容，而zed默认是将当前缓冲区的文本作为标准输入传，因此不用像prettier那样加--stdin-filepath？
-// 以下等同于：sed -e 's/ *$//'
-{
-  "formatter": {
-    "external": {
-      "command": "sed",
-      "arguments": ["-e", "s/ *$//"]
-    }
-  }
-}
-```
-
-通过`command`指定命令，`argument`指定参数或值。可以执行命令行中能运行的任意命令，命令的标准输出（stdout）将会直接写入当前文件中。
-
-方式 3：LSP 提供的 code action **(只用 ESLint 推荐这种方式)**
-
-```json
-{
-  "formatter": {
-    "code_actions": {
-      // Use ESLint's --fix:
-      "source.fixAll.eslint": true,
-      // Organize imports on save:
-      "source.organizeImports": true
-    }
-  }
-}
-```
-
-方式四：数组形式结合多个
-
-```json
-{
-  "formatter": [
-    {"language_server": {"name": "rust-analyzer"}},
-    {"external": {
-      "command": "sed",
-      "arguments": ["-e", "s/ *$//"]
-    }
-  ]
-}
-```
+通过在项目根目录创建`.zed/settings.json`进行配置（也可以`Command + Shift + P`，选择`zed: open local settings`快捷创建）
 
 ## 登录问题
 
