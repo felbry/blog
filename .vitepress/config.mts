@@ -93,6 +93,10 @@ export default defineConfig({
           ],
         },
         {
+          text: 'Apifox',
+          items: [{ text: 'Apifox 批量模拟数据', link: '/apifox/batch-mock-data' }],
+        },
+        {
           text: 'Strapi v5',
           items: [
             { text: 'Docker 一个工程', link: '/strapi/docker-start' },
