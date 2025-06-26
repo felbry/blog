@@ -84,7 +84,7 @@ Get "https://<ip>:<port>/v2/": http: server gave HTTP response to HTTPS client
 
 前置条件：当前处于 docker registry 的编排目录`/opt/1panel/apps/docker-registry/docker-registry`
 
-![image](https://felbry.github.io/picx-images-hosting/image.5mntkyhexu.webp)
+![image](https://cdn.jsdmirror.com/gh/felbry/picx-images-hosting@master/image.5mntkyhexu.webp)
 
 此时运行：
 

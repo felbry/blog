@@ -1,6 +1,6 @@
 # 参考 Element Plus Demo 和 Vue SFC Playground 自定义预览组件
 
-![image](https://felbry.github.io/picx-images-hosting/image.6bh22961ab.webp)
+![image](https://cdn.jsdmirror.com/gh/felbry/picx-images-hosting@master/image.6bh22961ab.webp)
 
 主流的组件库都有这样的预览功能，比如上图所示的[Element Plus - Button](https://element-plus.org/zh-CN/component/button.html#%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95)。在预览之外，还有代码展示，Playground 等功能
 

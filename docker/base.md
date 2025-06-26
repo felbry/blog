@@ -365,13 +365,13 @@ services:
 
 - 方式 1：（推荐）
 
-  ![image](https://felbry.github.io/picx-images-hosting/image.3yeg55fyks.webp)
+  ![image](https://cdn.jsdmirror.com/gh/felbry/picx-images-hosting@master/image.3yeg55fyks.webp)
 
 - 方式 2：参考[daemon configuration file](https://docs.docker.com/reference/cli/dockerd/#daemon-configuration-file)、[http/https proxy](https://docs.docker.com/engine/daemon/proxy/#httphttps-proxy)
 
   mac 版配置如图：（参考[请问大佬， MacOS 下如何设置 docker 使用本地代理？ - v2ex](https://s.v2ex.com/t/1056546#r_14982082)）
 
-  ![image](https://felbry.github.io/picx-images-hosting/image.9rje8kv6hg.webp)
+  ![image](https://cdn.jsdmirror.com/gh/felbry/picx-images-hosting@master/image.9rje8kv6hg.webp)
 
 2. `ERROR [client internal] load metadata for docker.io/library/node:20`
 
