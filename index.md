@@ -3,8 +3,8 @@
 layout: home
 
 hero:
-  name: "Felbry's Blog"
-  text: '个人博客'
+  name: '小晶晶Bling Bling'
+  text: ''
   actions:
     - theme: brand
       text: 技术笔记

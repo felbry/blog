@@ -7,7 +7,7 @@ import { footnote } from '@mdit/plugin-footnote'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: "Felbry's Blog",
+  title: '小晶晶Bling Bling',
   description: '个人博客',
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
