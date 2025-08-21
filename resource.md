@@ -36,6 +36,7 @@ sidebar: false
 - [shoelace](https://shoelace.style/)
 - [Quark Design](https://quark-ecosystem.github.io/quarkd-docs/) 哈啰团队出品
 - [Web Awesome](https://backers.webawesome.com/docs/components/input/)
+- [kelp](https://kelpui.com/)
 
 单组件
 
