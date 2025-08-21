@@ -8,7 +8,7 @@
 
 组件可以根据用户的交互或系统事件改变海拔（本例中通过添加阴影来实现）
 
-![](https://cdn.jsdmirror.com/gh/felbry/picx-images-hosting@master/zindex2.esehswvo7.gif)
+![](https://img.wangj.top/zindex2.esehswvo7.gif)
 
 ## 形成海拔
 
@@ -20,7 +20,7 @@
 
 阴影的大小、柔和度或扩散程度能表示两个平面之间的距离程度。
 
-![image](https://cdn.jsdmirror.com/gh/felbry/picx-images-hosting@master/image.7ax2207ttj.webp)
+![](https://img.wangj.top/image.7ax2207ttj.webp)
 
 左图更小、更清晰的阴影表示和背景非常接近；右图更大、更柔和的阴影表示距离很远。
 

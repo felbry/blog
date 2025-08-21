@@ -12,11 +12,11 @@
 
 通过“反向代理”功能，将“域名”指向要代理的“本地服务”
 
-![image](https://cdn.jsdmirror.com/gh/felbry/picx-images-hosting@master/image.7egsfq7b7o.webp)
+![](https://img.wangj.top/image.7egsfq7b7o.webp)
 
 ## 2. 在网站设置中配置 https 证书
 
-![image](https://cdn.jsdmirror.com/gh/felbry/picx-images-hosting@master/image.86tnxgs7mr.webp)
+![](https://img.wangj.top/image.86tnxgs7mr.webp)
 
 ## 3. 验证
 

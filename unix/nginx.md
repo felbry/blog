@@ -81,13 +81,13 @@ server {
 ::: details 不推荐阿里云的“隐性 URL”
 根据域名转发到服务器的对应端口可以从“域名解析”处配置实现，
 
-![image](https://cdn.jsdmirror.com/gh/felbry/picx-images-hosting@master/image.64ds4lt9qo.webp)
+![](https://img.wangj.top/image.64ds4lt9qo.webp)
 
 如图所示：先配置一条 A 记录，访问`http://school.example.com`能解析到指定 ip；然后再配置一条隐性 URL，实现访问`http://imgs.example.com`实际转发为：`http://school.example.com:<端口号>`的效果。
 
 这种效果能满足一些简单场景，但如图片这类静态服务，会导致 Content-Type 头出现问题，如图所示：
 
-![image](https://cdn.jsdmirror.com/gh/felbry/picx-images-hosting@master/image.7w6qzi9evd.webp)
+![](https://img.wangj.top/image.7w6qzi9evd.webp)
 
 最终效果就是：
 

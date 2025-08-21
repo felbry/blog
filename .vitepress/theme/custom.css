@@ -1,0 +1,6 @@
+img + figcaption {
+  text-align: center;
+  font-size: 0.8em;
+  margin: 10px 0;
+  color: var(--vp-c-text-3);
+}

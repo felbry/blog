@@ -4,6 +4,7 @@ import mdContainer from 'markdown-it-container'
 import createDemoContainer from './plugins/markdown/demo.js'
 import appendDemoImportsToMd from './plugins/vite/append-imports-to-markdown.js'
 import { footnote } from '@mdit/plugin-footnote'
+import { figure } from '@mdit/plugin-figure'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -101,6 +102,7 @@ export default defineConfig({
           items: [
             { text: 'Docker 一个工程', link: '/strapi/docker-start' },
             { text: '快速设置', link: '/strapi/pre-setting' },
+            { text: '用户权限设计及初始化', link: '/strapi/users-permissions' },
             { text: '创建/自定义接口', link: '/strapi/custom-api' },
             { text: '抛错', link: '/strapi/throw-error' },
             { text: 'strapi.xxx', link: '/strapi/strapi-api' },
@@ -131,7 +133,7 @@ export default defineConfig({
     socialLinks: [{ icon: 'github', link: 'https://github.com/felbry' }],
   },
   markdown: {
-    config: (md) => md.use(mdContainer, 'demo', createDemoContainer(md)).use(footnote),
+    config: (md) => md.use(mdContainer, 'demo', createDemoContainer(md)).use(footnote).use(figure),
   },
   vite: {
     server: {

@@ -8,7 +8,7 @@
 
 `git clone 项目地址 本地文件夹名(可选)`
 
-![image](https://cdn.jsdmirror.com/gh/felbry/picx-images-hosting@master/image.8vmuy45y0p.webp)
+![](https://img.wangj.top/image.8vmuy45y0p.webp)
 
 ## 基于远程 develop 分支 创建 本地 develop 分支
 
@@ -24,13 +24,13 @@
 
 首先运行`git branch`，看下刚 clone 下来的项目有没有**本地分支**
 
-![image](https://cdn.jsdmirror.com/gh/felbry/picx-images-hosting@master/image.1lbrn33nn5.webp)
+![](https://img.wangj.top/image.1lbrn33nn5.webp)
 
 可以看到，默认有一个`main`的本地分支。可以理解为在 clone 动作时，就基于远程的`main`分支创建了对应的本地`main`分支。（有的项目可能是`master`，这取决于创建 git 仓库时所用的 git 版本，对于这个默认初始分支名称，低版本是`master`，高版本是`main`）
 
 运行`git branch -a`，可以看到**本地分支**和**远程分支**。（远程分支都是 remotes/origin 开头的）
 
-![image](https://cdn.jsdmirror.com/gh/felbry/picx-images-hosting@master/image.39l4ka9mge.webp)
+![](https://img.wangj.top/image.39l4ka9mge.webp)
 
 ::: info 基于远程分支创建本地分支分两步
 第一切换到远程分支，第二从中检出。
@@ -40,17 +40,17 @@
 
 `git checkout remotes/origin/develop`
 
-![image](https://cdn.jsdmirror.com/gh/felbry/picx-images-hosting@master/image.92q2tl5n90.webp)
+![](https://img.wangj.top/image.92q2tl5n90.webp)
 
 > 2. 从中检出
 
 `git checkout -b develop`
 
-![image](https://cdn.jsdmirror.com/gh/felbry/picx-images-hosting@master/image.2krv09wk1c.webp)
+![](https://img.wangj.top/image.2krv09wk1c.webp)
 
 此时再运行`git branch`，可以看到已有远程 develop 分支对应的本地 develop 分支了，且当前正处于该分支上。
 
-![image](https://cdn.jsdmirror.com/gh/felbry/picx-images-hosting@master/image.6ik8gy8zzz.webp)
+![](https://img.wangj.top/image.6ik8gy8zzz.webp)
 
 ## [重点/必读] 分支命名规范
 

@@ -40,7 +40,7 @@ neutual 是中性的、neutral variant 中性变体
 
 在生成颜色时，有 standard、medium（3:1）、high 三种对比度可选，由于每种人群对不同颜色对比度的感知不同，可以根据场景设置合适的对比度。
 
-![image](https://cdn.jsdmirror.com/gh/felbry/picx-images-hosting@master/image.361glknzji.webp)
+![](https://img.wangj.top/image.361glknzji.webp)
 
 举例来说：一种颜色的 50 和 99 的色值就能创建出 3:1 的对比度
 

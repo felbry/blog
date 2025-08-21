@@ -4,11 +4,11 @@
 
 输入一个自己的邮箱
 
-![image](https://cdn.jsdmirror.com/gh/felbry/picx-images-hosting@master/image.4g4ic0rpk8.webp)
+![](https://img.wangj.top/image.4g4ic0rpk8.webp)
 
 ## 2. 创建 DNS 账户
 
-![image](https://cdn.jsdmirror.com/gh/felbry/picx-images-hosting@master/image.54xrw67rer.webp)
+![](https://img.wangj.top/image.54xrw67rer.webp)
 
 ## 3. 申请证书
 
@@ -18,7 +18,7 @@
 默认勾选了“自动续签”功能
 :::
 
-![image](https://cdn.jsdmirror.com/gh/felbry/picx-images-hosting@master/image.5j47n1d8la.webp)
+![](https://img.wangj.top/image.5j47n1d8la.webp)
 
 ## 4. [可选]下载/保存证书
 

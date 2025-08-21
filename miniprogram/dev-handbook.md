@@ -229,7 +229,7 @@ module.exports = { msg: msg, bar: bar }
 
   腾讯的地图选点插件需要腾讯地图的 key，核心功能依赖[地点搜索](https://lbs.qq.com/faq/serverFaq/webServiceSpaceSearch)，个人开发者实际额度[每日 PV200](https://lbs.qq.com/dev/console/quotaImprove)，查一下就没了，不把个人开发者当人。而[高德免费额度](https://lbs.amap.com/upgrade#price)更是调整到了 100，个人开发者 g 了
 
-  ![image](https://cdn.jsdmirror.com/gh/felbry/picx-images-hosting@master/image.9rjfz7j0dg.webp)
+  ![](https://img.wangj.top/image.9rjfz7j0dg.webp)
 
 ### [setData](https://developers.weixin.qq.com/miniprogram/dev/framework/performance/tips/runtime_setData.html#_3-4-setData-%E5%BA%94%E5%8F%AA%E4%BC%A0%E5%8F%91%E7%94%9F%E5%8F%98%E5%8C%96%E7%9A%84%E6%95%B0%E6%8D%AE)
 
@@ -259,7 +259,7 @@ this.setData({
 </scroll-view>
 ```
 
-![image](https://cdn.jsdmirror.com/gh/felbry/picx-images-hosting@master/image.lvrsqhhtd.webp)
+![](https://img.wangj.top/image.lvrsqhhtd.webp)
 
 ```html
 <scroll-view
@@ -272,7 +272,7 @@ this.setData({
 </scroll-view>
 ```
 
-![image](https://cdn.jsdmirror.com/gh/felbry/picx-images-hosting@master/image.4g4jbp73ho.webp)
+![](https://img.wangj.top/image.4g4jbp73ho.webp)
 
 如果需要设置`gap`，参见[skyline 下的 flex 相关问题](./dev-problem#flex-相关问题)
 
@@ -288,7 +288,7 @@ picker 是没有宽高的，如果其子元素也没有宽高（比如空值且�
 
 通过[页面配置](https://developers.weixin.qq.com/miniprogram/dev/reference/configuration/page.html)设置`navigationStyle`为`custom`
 
-![image](https://cdn.jsdmirror.com/gh/felbry/picx-images-hosting@master/image.73tz83aaq3.webp)
+![](https://img.wangj.top/image.73tz83aaq3.webp)
 
 - 黄色：状态栏高度
 - 绿色：胶囊距离顶部高度

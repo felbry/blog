@@ -20,17 +20,17 @@ chsh -s /bin/zsh
 
 重新启动后可能会弹出这个弹窗，因为没有默认的 zsh 配置文件
 
-![image](https://cdn.jsdmirror.com/gh/felbry/picx-images-hosting@master/image.7i0b89uk7x.webp)
+![](https://img.wangj.top/image.7i0b89uk7x.webp)
 
 选择 2，初始化一个配置文件。完成后通过 vim 命令就能查看到这个配置文件内容了
 
-![image](https://cdn.jsdmirror.com/gh/felbry/picx-images-hosting@master/image.3d4pw5ytfb.webp)
+![](https://img.wangj.top/image.3d4pw5ytfb.webp)
 
 ### 安装 oh-my-zsh
 
 有条件的优先[官网方式](https://ohmyz.sh/#install)，没条件走国内镜像：`sh -c "$(wget -O- https://gitee.com/mirrors/oh-my-zsh/raw/master/tools/install.sh)"`
 
-![image](https://cdn.jsdmirror.com/gh/felbry/picx-images-hosting@master/image.4n7n2hjd9p.webp)
+![](https://img.wangj.top/image.4n7n2hjd9p.webp)
 
 **安装插件 zsh-autosuggestions**
 

@@ -16,7 +16,7 @@ hover（8%）、focus（10%）、press（10%），drag（16%）
 
 观察[@material/web 的 text-field 组件](https://material-web.dev/components/text-field/#input-type)
 
-![image](https://cdn.jsdmirror.com/gh/felbry/picx-images-hosting@master/image.7p3i8axh37.webp)
+![](https://img.wangj.top/image.7p3i8axh37.webp)
 
 可以看出，它的实现是分别定义了背景、状态层、组件容器三个元素。
 
@@ -28,8 +28,8 @@ disabled 和状态层还有所区别，在[Material Design v3 文档](https://m3
 
 通过观察 button 和 text-fields 两个组件的文档：
 
-![image](https://cdn.jsdmirror.com/gh/felbry/picx-images-hosting@master/image.3nritx6p4k.webp)
+![](https://img.wangj.top/image.3nritx6p4k.webp)
 
-![image](https://cdn.jsdmirror.com/gh/felbry/picx-images-hosting@master/image.54xnvocin8.webp)
+![](https://img.wangj.top/image.54xnvocin8.webp)
 
 可以看到：文字和 icon 确实是正常状态的**38%**，但是背景稍有不同，一个是**12%**，一个是**4%**。因此得出结论：文字按**38%**，背景因组件而异。
