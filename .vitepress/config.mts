@@ -27,6 +27,7 @@ export default defineConfig({
       '/': [
         { text: '简介', link: '/summary' },
         { text: 'Git', link: '/git' },
+        { text: 'Vue 3 特性手册', link: '/vue3-guide' },
         {
           text: '微信小程序',
           items: [
