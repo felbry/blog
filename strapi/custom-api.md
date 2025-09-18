@@ -210,12 +210,12 @@ module.exports = ({ strapi }) => ({
             await strapi
               .documents('plugin::users-permissions.role')
               .findFirst({ filter: { type: { $eq: advanced.default_role } } })
-          ).id,
+          ).documentId, // 这个按照v5规范，存documentId
         },
       })
     }
     ctx.body = {
-      token: strapi.service('plugin::users-permissions.jwt').issue({ id: user.id }),
+      token: strapi.service('plugin::users-permissions.jwt').issue({ id: user.id }), // 这个必须是用户的id，如果用documentId会导致接口权限校验失败 401
       user: strapi.service('admin::user').sanitizeUser(user),
     }
   },

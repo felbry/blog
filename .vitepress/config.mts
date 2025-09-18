@@ -39,6 +39,18 @@ export default defineConfig({
           ],
         },
         {
+          text: 'Strapi v5',
+          items: [
+            { text: 'Docker 一个工程', link: '/strapi/docker-start' },
+            { text: '快速设置', link: '/strapi/pre-setting' },
+            { text: '用户权限', link: '/strapi/users-permissions' },
+            { text: '创建/自定义接口', link: '/strapi/custom-api' },
+            { text: '抛错', link: '/strapi/throw-error' },
+            { text: 'strapi.xxx', link: '/strapi/strapi-api' },
+            { text: 'REST/Document 操作', link: '/strapi/rest-document' },
+          ],
+        },
+        {
           text: '构建工具',
           items: [{ text: 'Vite 和 Rollup 插件开发', link: '/build-tools/vite-and-rollup-plugin' }],
         },
@@ -97,18 +109,6 @@ export default defineConfig({
         {
           text: 'Apifox',
           items: [{ text: 'Apifox 批量模拟数据', link: '/apifox/batch-mock-data' }],
-        },
-        {
-          text: 'Strapi v5',
-          items: [
-            { text: 'Docker 一个工程', link: '/strapi/docker-start' },
-            { text: '快速设置', link: '/strapi/pre-setting' },
-            { text: '用户权限设计及初始化', link: '/strapi/users-permissions' },
-            { text: '创建/自定义接口', link: '/strapi/custom-api' },
-            { text: '抛错', link: '/strapi/throw-error' },
-            { text: 'strapi.xxx', link: '/strapi/strapi-api' },
-            { text: 'REST/Document 操作', link: '/strapi/rest-document' },
-          ],
         },
         {
           text: 'uni-app',
