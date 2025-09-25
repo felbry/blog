@@ -153,7 +153,7 @@ Component({
 
 其实第三方组件基本都能被页面样式覆盖，所以样式还在`A.wxss`中维护，哪个页面用 A 组件了，在`页面.wxss`中`@import "path/to/A.wxss"`即可
 
-### [WXML 语法](https://developers.weixin.qq.com/miniprogram/dev/reference/wxml/)
+### [WXML/WXS 语法](https://developers.weixin.qq.com/miniprogram/dev/reference/wxml/)
 
 ```html
 <!-- boolean -->
@@ -196,6 +196,13 @@ module.exports = { msg: msg, bar: bar }
 - `for ... in`遍历对象 -> [polyfill 的方式比较麻烦，有些无解](https://developers.weixin.qq.com/community/develop/doc/000ece286546c0db98a7e74a951800?page=1#comment-list)
 - 所有 ES6 语法：`let`、字符串模板、对象方法简写（在`module.exports`时）
 - `try ... catch`
+
+::: tip
+
+1. 编辑器需要设置**File Associations**：`*.wxs`值为`javascript`、`*.wxml`值为`html`、`*.wxss`值为`css`
+2. 大部分情况`wxml`中的`wxs`代码块都不支持高亮显示，因此建议统一在`wxs`文件中写`wxs`代码，文件名可以和`wxml`名称相同，引入时通过`<wxs module="_" src="./<name>.wxs"></wxs>`使用
+
+:::
 
 ### [npm 支持](https://developers.weixin.qq.com/miniprogram/dev/devtools/npm.html)
 
