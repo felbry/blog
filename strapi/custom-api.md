@@ -209,7 +209,7 @@ module.exports = ({ strapi }) => ({
           role: (
             await strapi
               .documents('plugin::users-permissions.role')
-              .findFirst({ filter: { type: { $eq: advanced.default_role } } })
+              .findFirst({ filters: { type: { $eq: advanced.default_role } } })
           ).documentId, // 这个按照v5规范，存documentId
         },
       })
