@@ -45,7 +45,7 @@
 }
 ```
 
-完整的配置项如下：
+[完整的配置项](https://zed.dev/docs/configuring-languages#language-specific-settings)如下：
 
 - `tab_size` 每个缩进级别的空格数
 - `formatter` （既可以在全局配置、也可以在`languages`的某个语言配置）
@@ -62,15 +62,19 @@
 
   方式 2：`external` **(只用 Prettier 推荐这种方式)**
 
-  !!! prettier 配置暂未验证成功，需调试
+  官方推荐 prettier 的配置方式（如果全局没有安装prettier，可以像下边一样使用`npx`）：
+
+  > [!CAUTION] 注意
+  > prettier的配置经实践会报错，说是找不到文件，怀疑跟访问权限有关系
+  >
+  > 实际上，如果想使用prettier，只需要按方式1的`"formatter": "prettier"`即可，因为zed具备这个language_server
 
   ```json
-  // prettier之所以要加--stdin-filepath，可能不指定文件就会格式这个工程的文件？
-  // {buffer_path}应该属于zed的变量？表明当前文件路径？不像是系统变量，因为在一个目录运行buffer_path肯定不能确定是哪一个文件。
+  // --stdin-filepath为“标准输入文件路径”；{buffer_path}即当前正在编辑的文件路径
   {
     "formatter": {
       "external": {
-        "command": "prettier",
+        "command": "npx prettier",
         "arguments": ["--stdin-filepath", "{buffer_path}"]
       }
     }
@@ -92,18 +96,16 @@
 
   通过`command`指定命令，`argument`指定参数或值。可以执行命令行中能运行的任意命令，命令的标准输出（stdout）将会直接写入当前文件中。
 
-  方式 3：LSP 提供的 code action **(只用 ESLint 推荐这种方式)**
+  ~~方式 3：LSP 提供的 code action~~ 文档中的该方式是有问题，正确应该是使用`code_actions_on_format`
 
   ```json
   {
-    "formatter": {
-      "code_actions": {
-        // Use ESLint's --fix:
-        "source.fixAll.eslint": true,
-        // Organize imports on save:
-        "source.organizeImports": true
-      }
-    }
+    "formatter": [
+      // Use ESLint's --fix:
+      { "code_action": "source.fixAll.eslint" },
+      // Organize imports on save:
+      { "code_action": "source.organizeImports" }
+    ]
   }
   ```
 
@@ -139,12 +141,13 @@
 - `hard_tabs` 使用制表符缩进而不是空格
 - `perferred_line_length` 建议的最大行长度
 - `soft_wrap` 如何换行长行代码
-- `show_completions_on_input` 【新增】是否在输入时显示补全
-- `show_completion_documentation`【新增】
+- `show_completions_on_input` 是否在输入时显示补全
+- `show_completion_documentation`
+- [`show_edit_predictions`](https://zed.dev/docs/ai/edit-prediction?highlight=show_edit_predic#disabling-automatic-edit-prediction) 编辑预测
 
 之前有，但最新文档没提的（推测还能用）
 
-- ~~`code_actions_on_format`~~
+- ~~`code_actions_on_format`~~ 这个配置在2025/11/10（0.211.6）还能用，而且文档中的`code_action`配置方式反倒是有问题的，垃圾文档
 - ~~`language_servers`~~
 
   手动配置 PHP 语言文件关联的 LSP
